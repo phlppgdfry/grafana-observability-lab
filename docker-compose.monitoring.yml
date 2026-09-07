@@ -1,0 +1,13 @@
+services:
+  probe:
+    image: grafana/synthetic-monitoring-agent@sha256:1822d709f06bab44f31f0373ea134e4e496ce84e13f2f9e7d6519d9e0c26bc51
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    env_file:
+      - .local/probe.env
+    command:
+      - --api-server-address=synthetic-monitoring-grpc-gb-south-1.grafana.net:443
+      - --disable-k6
+      - --disable-usage-reports

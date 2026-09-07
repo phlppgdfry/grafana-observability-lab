@@ -2,6 +2,8 @@
 
 Een zelfstandig lab om in 14 werkdagen een documentverwerkings-API zichtbaar, meetbaar en testbaar te maken met Grafana Cloud.
 
+**Trial-einde: 21 september 2026.** Daarna schakelt de account automatisch naar Free. We ronden de evaluatie uiterlijk 20 september af.
+
 ## Dag 1
 
 - Demo-API zonder externe dependencies, lokaal op poort 4310.
@@ -51,6 +53,8 @@ gcx datasources list --context lab
 OAuth-credentials worden door gcx buiten deze repo bewaard. De extra Cloud-productaanmelding is een afzonderlijke stap als Synthetic Monitoring die vereist.
 
 Publieke Grafana-probes kunnen localhost niet bereiken. Een Cloud-check voor deze app vereist een private probe op de lokale omgeving of een bereikbare testdeployment. De dag-1-check draait lokaal en in GitHub Actions.
+
+De private-probe-configuratie is voorbereid in `docker-compose.monitoring.yml` en `tests/grafana-healthcheck.yaml`. Activering wacht op een Cloud Access Policy-token. Zie [Cloud-check instellen](docs/cloud-check.md).
 
 ## Structuur
 

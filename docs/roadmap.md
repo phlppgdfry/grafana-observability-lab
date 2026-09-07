@@ -17,4 +17,4 @@
 | 13 | Logs, metrics, sampling en frequenties afstellen | Verbruik afgestemd op blijvend plan |
 | 14 | Walkthrough, screenshots en architectuur | Toonbaar project |
 
-Controleer de account-einddatum: de trial begon bij accountactivatie, niet bij het aanmaken van deze repo. Geen automatische dagelijkse uitvoering ingepland.
+De trial eindigt op **21 september 2026**, bevestigd via de accountmelding door de gebruiker. Rond de evaluatie en afstemming op Free uiterlijk 20 september af. Geen automatische dagelijkse uitvoering ingepland.

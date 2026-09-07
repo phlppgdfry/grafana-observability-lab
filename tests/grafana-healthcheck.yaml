@@ -1,0 +1,23 @@
+# Prepared definition; apply only after the named private probe is created.
+apiVersion: syntheticmonitoring.ext.grafana.app/v1alpha1
+kind: Check
+metadata:
+  name: document-lab-health
+spec:
+  job: document-lab-health
+  target: http://app:4310/health
+  frequency: 60000
+  timeout: 5000
+  enabled: true
+  labels:
+    - name: environment
+      value: lab
+  probes:
+    - document-lab-local
+  alertSensitivity: none
+  basicMetricsOnly: true
+  settings:
+    http:
+      method: GET
+      validStatusCodes: [200]
+      noFollowRedirects: true
