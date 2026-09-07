@@ -1,0 +1,25 @@
+name: Lab checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm test
+      - name: Start demo and verify reachability
+        shell: bash
+        run: |
+          node app/server.mjs > /tmp/document-lab.log 2>&1 &
+          lab_pid=$!
+          trap 'kill "$lab_pid"' EXIT
+          for attempt in {1..20}; do
+            if npm run check; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/document-lab.log
+          exit 1

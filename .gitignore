@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+.gcx.yaml
+node_modules/
+coverage/
+.DS_Store
+*.log
+.local/

@@ -1,0 +1,12 @@
+{
+  "name": "grafana-observability-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node app/server.mjs",
+    "check": "node tests/reachability.mjs",
+    "test": "node --test tests/app.test.mjs"
+  }
+}
