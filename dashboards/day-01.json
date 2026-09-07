@@ -1,0 +1,304 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "document-lab-day-1",
+    "annotations": {
+      "grafana.app/folder": "grafana-observability-lab"
+    }
+  },
+  "spec": {
+    "title": "Document Lab \u00b7 Bereikbaarheid",
+    "tags": [
+      "observability-lab",
+      "day-1"
+    ],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "refresh": "1m",
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "templating": {
+      "list": []
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "text",
+        "title": "Dag 1 \u00b7 Document Lab",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 4
+        },
+        "options": {
+          "mode": "markdown",
+          "content": "**Live bereikbaarheidscheck vanuit je Mac \u2192 Grafana Cloud**  \nControle elke 60 seconden op `document-lab.test:4310/health`. De demo en probe draaien in Docker. Bij slaapstand of een gestopte probe ontbreken metingen.\n\nTrial tot **21 september 2026** \u00b7 [GitHub-repo](https://github.com/phlppgdfry/grafana-observability-lab)"
+        }
+      },
+      {
+        "id": 2,
+        "type": "stat",
+        "title": "Bereikbaar",
+        "description": "Laatste ontvangen meting: 1 = bereikbaar, 0 = check mislukt. Geen data is onbekend.",
+        "gridPos": {
+          "x": 0,
+          "y": 4,
+          "w": 8,
+          "h": 5
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "noValue": "Geen meting",
+            "decimals": 0,
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "1": {
+                    "text": "ONLINE",
+                    "color": "green"
+                  },
+                  "0": {
+                    "text": "FOUT",
+                    "color": "red"
+                  }
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})",
+            "instant": true,
+            "range": false
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 3,
+        "type": "stat",
+        "title": "Responstijd",
+        "description": "Duur van de laatste HTTP-check vanuit de private lokale probe.",
+        "gridPos": {
+          "x": 8,
+          "y": 4,
+          "w": 8,
+          "h": 5
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "noValue": "Geen meting",
+            "decimals": 3,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "blue"
+            }
+          },
+          "overrides": []
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "max(probe_duration_seconds{job=\"document-lab-health\",probe=\"document-lab-local\"})",
+            "instant": true,
+            "range": false
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 4,
+        "type": "stat",
+        "title": "HTTP-status",
+        "description": "De check verwacht HTTP 200.",
+        "gridPos": {
+          "x": 16,
+          "y": 4,
+          "w": 8,
+          "h": 5
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "noValue": "Geen meting",
+            "decimals": 0,
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "200": {
+                    "text": "200 OK",
+                    "color": "green"
+                  }
+                }
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "max(probe_http_status_code{job=\"document-lab-health\",probe=\"document-lab-local\"})",
+            "instant": true,
+            "range": false
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 5,
+        "type": "timeseries",
+        "title": "Bereikbaarheid in de tijd",
+        "description": "Ontbrekende metingen blijven gaten; geen interpolatie bij een offline probe.",
+        "gridPos": {
+          "x": 0,
+          "y": 9,
+          "w": 24,
+          "h": 8
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "min": 0,
+            "custom": {
+              "drawStyle": "line",
+              "lineWidth": 2,
+              "fillOpacity": 12,
+              "spanNulls": false
+            }
+          },
+          "overrides": []
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}",
+            "legendFormat": "{{probe}}",
+            "range": true
+          }
+        ],
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "type": "timeseries",
+        "title": "Responstijd in de tijd",
+        "description": "Ontbrekende metingen blijven gaten; geen interpolatie bij een offline probe.",
+        "gridPos": {
+          "x": 0,
+          "y": 17,
+          "w": 24,
+          "h": 8
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "min": 0,
+            "custom": {
+              "drawStyle": "line",
+              "lineWidth": 2,
+              "fillOpacity": 12,
+              "spanNulls": false
+            }
+          },
+          "overrides": []
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "probe_duration_seconds{job=\"document-lab-health\",probe=\"document-lab-local\"}",
+            "legendFormat": "{{probe}}",
+            "range": true
+          }
+        ],
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        }
+      }
+    ]
+  }
+}

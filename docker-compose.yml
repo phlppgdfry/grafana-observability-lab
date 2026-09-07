@@ -1,5 +1,9 @@
 services:
   app:
+    networks:
+      default:
+        aliases:
+          - document-lab.test
     build:
       context: .
       dockerfile: app/Dockerfile

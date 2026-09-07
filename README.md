@@ -1,6 +1,6 @@
 # Grafana Observability Lab
 
-Een zelfstandig lab om in 14 werkdagen een documentverwerkings-API zichtbaar, meetbaar en testbaar te maken met Grafana Cloud.
+Een zelfstandig lab om tijdens een 14-daagse trial een documentverwerkings-API zichtbaar, meetbaar en testbaar te maken met Grafana Cloud.
 
 **Trial-einde: 21 september 2026.** Daarna schakelt de account automatisch naar Free. We ronden de evaluatie uiterlijk 20 september af.
 
@@ -12,7 +12,7 @@ Een zelfstandig lab om in 14 werkdagen een documentverwerkings-API zichtbaar, me
 - GitHub Actions voor tests en een echte bereikbaarheidscheck.
 - Docker Compose-configuratie voor een reproduceerbare lokale omgeving.
 
-Grafana-verbinding en trial-status: zie [dag-1-verslag](docs/day-01.md). De lokale check stuurt op dag 1 nog geen meetgegevens naar Grafana. OpenTelemetry volgt op dag 2.
+**Live:** [Document Lab · Bereikbaarheid](https://bronzemillipede944.grafana.net/d/document-lab-day-1). De private probe stuurt elke minuut echte healthcheckmetingen naar Grafana. Zie het [dag-1-verslag](docs/day-01.md). Applicatie-interne OpenTelemetry volgt op dag 2.
 
 ## Starten
 
@@ -52,16 +52,16 @@ gcx datasources list --context lab
 
 OAuth-credentials worden door gcx buiten deze repo bewaard. De extra Cloud-productaanmelding is een afzonderlijke stap als Synthetic Monitoring die vereist.
 
-Publieke Grafana-probes kunnen localhost niet bereiken. Een Cloud-check voor deze app vereist een private probe op de lokale omgeving of een bereikbare testdeployment. De dag-1-check draait lokaal en in GitHub Actions.
+De actieve private Grafana-probe bereikt de demo via de Docker-alias `document-lab.test`. Er draait daarnaast een lokale check en een check in GitHub Actions.
 
-De private-probe-configuratie is voorbereid in `docker-compose.monitoring.yml` en `tests/grafana-healthcheck.yaml`. Activering wacht op een Cloud Access Policy-token. Zie [Cloud-check instellen](docs/cloud-check.md).
+De actieve private-probe-configuratie staat in `docker-compose.monitoring.yml` en `tests/grafana-healthcheck.yaml`. Start met `docker compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d --wait`. Lokale credentials zijn vereist. Zie [Cloud-check instellen](docs/cloud-check.md).
 
 ## Structuur
 
 | Map | Inhoud |
 | --- | --- |
 | `app/` | Zelfstandige documentverwerkingsdemo |
-| `dashboards/` | Dashboards vanaf dag 3 |
+| `dashboards/` | Live dag-1-healthdashboard; uitbreiding vanaf dag 3 |
 | `alerts/` | Meldingsregels vanaf dag 6 |
 | `telemetry/` | OpenTelemetry vanaf dag 2 |
 | `tests/` | Bereikbaarheidscheck en functionele tests; later k6 |

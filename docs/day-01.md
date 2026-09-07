@@ -1,29 +1,26 @@
-# Dag 1 — Verbinden
+# Dag 1 — Voltooid
 
-Gestart: 7 september 2026.
+Datum: 7 september 2026. Trial eindigt **21 september 2026**, bevestigd via de accountmelding van de gebruiker. Geen betaald plan geactiveerd.
 
-## Geverifieerd
+## Live resultaat
 
-- `gcx 1.2.0` geïnstalleerd via Homebrew.
-- Privé-repo: https://github.com/phlppgdfry/grafana-observability-lab
-- GitHub Actions geslaagd: https://github.com/phlppgdfry/grafana-observability-lab/actions/runs/34117584309
-- Grafana OAuth-context `lab` opgeslagen; `gcx config check --context lab` bevestigt geldige configuratie en online verbinding.
-- Databronnen voor metrics, logs en traces gevonden. Prometheus en Loki als CLI-default ingesteld.
-- Aanvullende Cloud OAuth-aanmelding geslaagd. Stack-API bevestigt `status: active`, `plan: free-trial`, aangemaakt op `2026-09-06T22:15:49Z` (7 september 00:15 Belgische tijd). Exacte trial-einddatum wordt niet geretourneerd.
-- Zelfstandige Node.js-demo, geen afhankelijkheid van DocuRelay of YardExx.
-- `npm test`: geslaagd (health, verwerking, ongeldige JSON, ontbrekende naam, te grote payload, onbekende route).
-- `npm run check`: geslaagd op 2026-09-07 om 11:36 UTC; HTTP-healthcheck inclusief inhoudscontrole, 97 ms in deze ene meting.
-- `docker compose config --quiet` en `docker compose build app`: geslaagd.
-- Docker-runtime geverifieerd: container `healthy`, lokaal bereikbaar op poort 4310. Functionele tests opnieuw geslaagd; healthcheck op 7 september 12:59 UTC geslaagd (87 ms, één meting).
-- Private-probe Compose-configuratie gevalideerd zonder secretbestand (`config --no-env-resolution --quiet`). De probe-image is gedownload en op digest vastgezet; activering en Cloud-resultaten wachten nog op de CAP-token.
-- Trial-einddatum bevestigd door de gebruiker via de accountmelding: **21 september 2026**. De account schakelt die dag automatisch naar Free tenzij de gebruiker zelf voor Pro kiest. Geen upgrade uitgevoerd.
+- [Dashboard: Document Lab · Bereikbaarheid](https://bronzemillipede944.grafana.net/d/document-lab-day-1), in map **Grafana Observability Lab**.
+- Private probe **document-lab-local**, ID **170**, draait naast de demo in Docker.
+- Cloud-check **document-lab-health**, ID **12093**, controleert elke 60 seconden `http://document-lab.test:4310/health` en verwacht HTTP 200 binnen 5 seconden.
+- Grafana rapporteert **OK**, 100% geslaagde metingen in het korte verificatievenster. Gemeten duur circa 6–7 ms vanuit de lokale probe; dit is geen internetlatentiebenchmark.
+- Prometheus bevat echte `probe_success=1`, `probe_http_status_code=200` en `probe_duration_seconds`-metingen voor deze check.
+- CLI-stackverbinding en Cloud-authenticatie werken. De CAP-policy vereist `stacks:read`, `metrics:write`, `logs:write` én `traces:write`.
 
-## Nog te verifiëren
+## Verificatie
 
-- Een blijvende Cloud Synthetic Monitoring-check; lokale app is niet publiek bereikbaar. Na geslaagde Cloud OAuth-aanmelding faalt `probes list` met `publisher token is invalid` bij SM register/install. Er is een compatibele Cloud Access Policy-token nodig voordat deze product-API gebruikt kan worden.
+- Functionele Node-tests geslaagd: health, verwerking, ongeldige JSON, ontbrekende naam, te grote payload en onbekende route.
+- Docker-image gebouwd; API-container gezond; lokale bereikbaarheidscheck geslaagd.
+- Check teruggelezen uit Grafana en status gecontroleerd via gcx.
+- Dashboardmanifest gevalideerd, aangemaakt en gerenderd. Kleurcorrectie: HTTP 200 wordt groen weergegeven.
+- Credentials staan uitsluitend lokaal in de uitgesloten `.local/`-map en in de gcx-gebruikersconfiguratie, niet in Git.
 
-De browserautomatisering kon niet starten (native pipe startup failed). De einddatum is daarom vastgelegd op basis van de accountmelding die de gebruiker aanleverde. Zie [Cloud-check](cloud-check.md) voor de voorbereide private-probe-opzet en resterende credentialstap.
+## Grenzen
 
-## Wat deze check bewijst
+De probe werkt zolang Docker en de Mac actief zijn. Slaapstand of een gestopte probe leidt tot ontbrekende metingen. Er zijn nog geen applicatie-interne OpenTelemetry-traces, applicatielogs of meldingen ingesteld. Dat volgt op de volgende dagen.
 
-De API draait en geeft binnen vijf seconden een correcte health-response. De check bewijst nog geen Cloud-ingestie, end-to-end documentopslag of continue beschikbaarheid. Dag 2 voegt OpenTelemetry toe.
+De Docker-hostnaam `app` werd door de Cloud-checkvalidatie afgewezen; de lokale DNS-alias `document-lab.test` wordt geaccepteerd en is succesvol gemeten.

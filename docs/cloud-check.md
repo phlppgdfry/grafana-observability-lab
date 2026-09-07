@@ -2,17 +2,17 @@
 
 ## Ontwerp
 
-De demo draait in Docker. Een private Grafana Synthetic Monitoring-probe controleert `http://app:4310/health` op hetzelfde Docker-netwerk en stuurt resultaten naar Grafana Cloud. Er is geen publieke deployment of tunnel nodig. De probe meet elke 60 seconden en verwacht HTTP 200 binnen vijf seconden. De lokale Node-check controleert daarnaast de response-inhoud.
+De demo draait in Docker. Een private Grafana Synthetic Monitoring-probe controleert `http://document-lab.test:4310/health` op hetzelfde Docker-netwerk en stuurt resultaten naar Grafana Cloud. Er is geen publieke deployment of tunnel nodig. De probe meet elke 60 seconden en verwacht HTTP 200 binnen vijf seconden. De lokale Node-check controleert daarnaast de response-inhoud.
 
 De probe draait zolang Docker en de Mac actief zijn. Slaapstand of een gestopte probe betekent ontbrekende metingen, niet automatisch een defecte applicatie. Dit is een labopstelling, geen onafhankelijke 24/7-monitor.
 
 ## Status
 
-De configuratie is voorbereid. De Cloud-check is nog niet geactiveerd: Cloud OAuth werkt voor stackbeheer maar wordt door SM register/install geweigerd met `publisher token is invalid`. Een Cloud Access Policy-token is nodig.
+**Actief en geverifieerd.** Probe `document-lab-local` (170), check `document-lab-health` (12093). Grafana ontvangt succesvolle metingen. Dashboard: https://bronzemillipede944.grafana.net/d/document-lab-day-1. De opgeslagen CAP-token heeft nu alle vier vereiste scopes.
 
 ## Credentials
 
-Maak in Grafana Cloud Access Policies een token met `stacks:read`, `metrics:write`, `logs:write` en toegang tot deze stack. Bewaar alleen de token in `.local/cloud-token`. Deze map wordt door Git en Docker uitgesloten. `npm run grafana` leest de token lokaal en geeft hem als omgevingsvariabele aan gcx, zonder hem in het commando of terminaloutput te schrijven.
+Maak in Grafana Cloud Access Policies een token met `stacks:read`, `metrics:write`, `logs:write`, `traces:write` en toegang tot deze stack. Bewaar alleen de token in `.local/cloud-token`. Deze map wordt door Git en Docker uitgesloten. `npm run grafana` leest de token lokaal en geeft hem als omgevingsvariabele aan gcx, zonder hem in het commando of terminaloutput te schrijven.
 
 ```sh
 npm run grafana -- synthetic-monitoring probes list
