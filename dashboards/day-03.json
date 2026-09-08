@@ -1,0 +1,466 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "document-lab-day-3",
+    "annotations": {
+      "grafana.app/folder": "grafana-observability-lab"
+    }
+  },
+  "spec": {
+    "title": "Document Lab · API-overzicht",
+    "tags": [
+      "observability-lab",
+      "day-3"
+    ],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "refresh": "1m",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "templating": {
+      "list": []
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "text",
+        "title": "Document Lab · API-overzicht",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 4
+        },
+        "options": {
+          "mode": "markdown",
+          "content": "**Verkeer · fouten · responstijden** — document-lab / lab\n\nGebaseerd op ontvangen aanvraagtraces; healthchecks tellen niet mee. **4xx** = afgewezen aanvraag, **5xx** = serverfout. Geen traces betekent geen inzicht in API-verkeer. [Bereikbaarheidsdashboard](/d/document-lab-day-1) · Nieuwe demo: `npm run demo:traffic`"
+        }
+      },
+      {
+        "id": 2,
+        "type": "stat",
+        "title": "Gemeten aanvragen",
+        "description": "Totaal ontvangen SERVER-spans met een HTTP-response in het gekozen tijdvenster. Geen healthchecks; geen schatting van verloren of niet-gesamplede traces.",
+        "datasource": {
+          "type": "tempo",
+          "uid": "grafanacloud-traces"
+        },
+        "gridPos": {
+          "x": 0,
+          "y": 4,
+          "w": 6,
+          "h": 5
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "tempo",
+              "uid": "grafanacloud-traces"
+            },
+            "queryType": "traceql",
+            "query": "{ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | count_over_time()",
+            "metricsQueryType": "instant",
+            "step": "30s",
+            "tableType": "traces"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "decimals": 0,
+            "noValue": "Geen meting",
+            "min": 0,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "blue"
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 3,
+        "type": "stat",
+        "title": "HTTP-fouten · 4xx + 5xx",
+        "description": "Aandeel antwoorden met HTTP-status >= 400 over het hele gekozen tijdvenster. Inclusief bewust ongeldige demo-invoer. Zonder aanvragen is dit ongedefinieerd.",
+        "datasource": {
+          "type": "tempo",
+          "uid": "grafanacloud-traces"
+        },
+        "gridPos": {
+          "x": 6,
+          "y": 4,
+          "w": 6,
+          "h": 5
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "tempo",
+              "uid": "grafanacloud-traces"
+            },
+            "queryType": "traceql",
+            "query": "(({ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | count_over_time()) - ({ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 && span.http.response.status_code < 400 } | count_over_time())) / ({ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | count_over_time())",
+            "metricsQueryType": "instant",
+            "step": "30s",
+            "tableType": "traces"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit",
+            "decimals": 1,
+            "noValue": "Geen meting",
+            "min": 0,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "orange"
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 4,
+        "type": "stat",
+        "title": "Serverfouten · 5xx",
+        "description": "Aantal HTTP 5xx-antwoorden in het gekozen tijdvenster. Verbindingsafbrekingen zonder HTTP-response tellen niet mee.",
+        "datasource": {
+          "type": "tempo",
+          "uid": "grafanacloud-traces"
+        },
+        "gridPos": {
+          "x": 12,
+          "y": 4,
+          "w": 6,
+          "h": 5
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "tempo",
+              "uid": "grafanacloud-traces"
+            },
+            "queryType": "traceql",
+            "query": "({ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | count_over_time()) - ({ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 && span.http.response.status_code < 500 } | count_over_time())",
+            "metricsQueryType": "instant",
+            "step": "30s",
+            "tableType": "traces"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "decimals": 0,
+            "noValue": "Geen meting",
+            "min": 0,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "purple"
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 5,
+        "type": "stat",
+        "title": "Responstijd · p95",
+        "description": "Geschatte grens waaronder 95% van de gemeten aanvragen valt, over het hele gekozen tijdvenster. Bij weinig aanvragen geen prestatienulmeting.",
+        "datasource": {
+          "type": "tempo",
+          "uid": "grafanacloud-traces"
+        },
+        "gridPos": {
+          "x": 18,
+          "y": 4,
+          "w": 6,
+          "h": 5
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "tempo",
+              "uid": "grafanacloud-traces"
+            },
+            "queryType": "traceql",
+            "query": "{ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | quantile_over_time(duration, .95)",
+            "metricsQueryType": "instant",
+            "step": "30s",
+            "tableType": "traces"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "decimals": 1,
+            "noValue": "Geen meting",
+            "min": 0,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "green"
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 6,
+        "type": "timeseries",
+        "title": "Aanvragen per seconde · per HTTP-status",
+        "description": "Aantal ontvangen aanvragen per seconde, in intervallen van 30 seconden, uitgesplitst per HTTP-status. Geen gegevens is geen bewijs van bereikbaarheid.",
+        "datasource": {
+          "type": "tempo",
+          "uid": "grafanacloud-traces"
+        },
+        "gridPos": {
+          "x": 0,
+          "y": 9,
+          "w": 12,
+          "h": 9
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "tempo",
+              "uid": "grafanacloud-traces"
+            },
+            "queryType": "traceql",
+            "query": "{ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | rate() by (span.http.response.status_code)",
+            "metricsQueryType": "range",
+            "step": "30s",
+            "tableType": "traces"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "min": 0,
+            "custom": {
+              "drawStyle": "line",
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "spanNulls": false,
+              "showPoints": "always",
+              "pointSize": 4
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "type": "timeseries",
+        "title": "Responstijd · p50 en p95",
+        "description": "Geschatte mediaan en p95 per interval van 30 seconden. Lege intervallen worden niet verbonden.",
+        "datasource": {
+          "type": "tempo",
+          "uid": "grafanacloud-traces"
+        },
+        "gridPos": {
+          "x": 12,
+          "y": 9,
+          "w": 12,
+          "h": 9
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "tempo",
+              "uid": "grafanacloud-traces"
+            },
+            "queryType": "traceql",
+            "query": "{ resource.service.name = \"document-lab\" && resource.deployment.environment.name = \"lab\" && kind = server && span.http.response.status_code >= 100 } | quantile_over_time(duration, .5, .95) > 0",
+            "metricsQueryType": "range",
+            "step": "30s",
+            "tableType": "traces"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "min": 0,
+            "custom": {
+              "drawStyle": "line",
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "spanNulls": false,
+              "showPoints": "always",
+              "pointSize": 4
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "0.5"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "p50"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "0.95"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "p95"
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "type": "stat",
+        "title": "Bereikbaarheid · laatste probe",
+        "description": "Laatste ontvangen meting: 1 = bereikbaar, 0 = check mislukt. Geen data is onbekend.",
+        "gridPos": {
+          "x": 0,
+          "y": 18,
+          "w": 6,
+          "h": 5
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "noValue": "Geen meting",
+            "decimals": 0,
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {
+                    "text": "FOUT",
+                    "color": "red"
+                  },
+                  "1": {
+                    "text": "ONLINE",
+                    "color": "green"
+                  }
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})",
+            "instant": true,
+            "range": false
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "value",
+          "graphMode": "none"
+        }
+      },
+      {
+        "id": 9,
+        "type": "text",
+        "title": "Zo lees je dit dashboard",
+        "gridPos": {
+          "x": 6,
+          "y": 18,
+          "w": 18,
+          "h": 5
+        },
+        "options": {
+          "mode": "markdown",
+          "content": "**p50** is de mediaan; **p95** is de geschatte bovengrens voor 95% van de aanvragen. De bovenste kaarten gebruiken het hele gekozen tijdvenster.\n\n`npm run demo:traffic` doet 40 echte HTTP-aanvragen: 32 geldig en 8 bewust ongeldig (20% HTTP 400). Dit is een demonstratie, geen belastingtest. Grafana kan de traces met vertraging tonen. Sampling, exportverlies of een gestopte API beperken de volledigheid."
+        }
+      }
+    ]
+  }
+}

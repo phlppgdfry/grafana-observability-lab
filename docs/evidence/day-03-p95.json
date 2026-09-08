@@ -1,0 +1,20 @@
+{
+  "series": [
+    {
+      "labels": [
+        {
+          "key": "p",
+          "value": {
+            "doubleValue": 0.95
+          }
+        }
+      ],
+      "value": 0.056431603169349066
+    }
+  ],
+  "metrics": {
+    "completedJobs": 1,
+    "inspectedBytes": "28282",
+    "totalJobs": 1
+  }
+}

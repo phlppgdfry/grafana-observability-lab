@@ -3,11 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node app/server.mjs",
     "check": "node tests/reachability.mjs",
-    "test": "node --test tests/app.test.mjs",
-    "grafana": "node tests/gcx-with-token.mjs"
+    "check:traces": "node tests/trace-smoke.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "grafana": "node tests/gcx-with-token.mjs",
+    "demo:traffic": "node tests/dashboard-traffic.mjs"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/exporter-trace-otlp-proto": "^0.222.0",
+    "@opentelemetry/resources": "^2.11.0",
+    "@opentelemetry/sdk-trace-node": "^2.11.0"
   }
 }

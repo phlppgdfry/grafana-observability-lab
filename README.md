@@ -6,19 +6,35 @@ Een zelfstandig lab om tijdens een 14-daagse trial een documentverwerkings-API z
 
 ## Dag 1
 
-- Demo-API zonder externe dependencies, lokaal op poort 4310.
+- Demo-API, lokaal op poort 4310.
 - Healthcheck met timeout, controle op HTTP-status én response-inhoud.
 - Functionele tests voor verwerking, ongeldige invoer en onbekende routes.
 - GitHub Actions voor tests en een echte bereikbaarheidscheck.
 - Docker Compose-configuratie voor een reproduceerbare lokale omgeving.
 
-**Live:** [Document Lab · Bereikbaarheid](https://bronzemillipede944.grafana.net/d/document-lab-day-1). De private probe stuurt elke minuut echte healthcheckmetingen naar Grafana. Zie het [dag-1-verslag](docs/day-01.md). Applicatie-interne OpenTelemetry volgt op dag 2.
+**Live:** [Document Lab · Bereikbaarheid](https://bronzemillipede944.grafana.net/d/document-lab-day-1). De private probe stuurt elke minuut echte healthcheckmetingen naar Grafana. Zie het [dag-1-verslag](docs/day-01.md). Applicatie-interne OpenTelemetry is aangesloten op dag 2; zie [het verslag](docs/day-02.md).
+
+## Dag 2
+
+OpenTelemetry-traces van echte API-aanvragen komen aan in Grafana Tempo, inclusief route, statuscode en duur. De API geeft een `x-trace-id` terug. Zie [starten met telemetrie](telemetry/README.md) en [verificatiebewijs](docs/day-02.md).
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.monitoring.yml -f docker-compose.telemetry.yml up -d --build --wait
+npm run check:traces
+```
+
+## Dag 3
+
+**Live:** [Document Lab · API-overzicht](https://bronzemillipede944.grafana.net/d/document-lab-day-3): aanvragen, HTTP-foutpercentage, serverfouten en responstijden op basis van echte traces. Zie [het dag-3-verslag](docs/day-03.md).
+
+Met het lab actief genereert `npm run demo:traffic` één begrensde demonstratie van 40 aanvragen. Dit is geen permanente verkeersgenerator.
 
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).
 
 ```sh
+npm ci
 npm start
 ```
 
@@ -61,9 +77,9 @@ De actieve private-probe-configuratie staat in `docker-compose.monitoring.yml` e
 | Map | Inhoud |
 | --- | --- |
 | `app/` | Zelfstandige documentverwerkingsdemo |
-| `dashboards/` | Live dag-1-healthdashboard; uitbreiding vanaf dag 3 |
+| `dashboards/` | Live dashboards voor bereikbaarheid en API-verkeer |
 | `alerts/` | Meldingsregels vanaf dag 6 |
-| `telemetry/` | OpenTelemetry vanaf dag 2 |
+| `telemetry/` | OpenTelemetry-tracing en startinstructies |
 | `tests/` | Bereikbaarheidscheck en functionele tests; later k6 |
 | `experiments/` | Gecontroleerde foutscenario’s vanaf dag 10 |
 | `docs/` | Voortgang, architectuur en bewijs |

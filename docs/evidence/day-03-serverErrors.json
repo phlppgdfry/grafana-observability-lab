@@ -1,0 +1,19 @@
+{
+  "series": [
+    {
+      "labels": [
+        {
+          "key": "__name__",
+          "value": {
+            "stringValue": "(count_over_time - count_over_time)"
+          }
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "completedJobs": 1,
+    "inspectedBytes": "55540",
+    "totalJobs": 1
+  }
+}
