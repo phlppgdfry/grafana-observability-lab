@@ -1,0 +1,112 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "deployment_environment_name": "lab",
+          "service_name": "document-lab"
+        },
+        "values": [
+          {
+            "timestamp": "1789102406231000000",
+            "line": "HTTP request completed",
+            "structuredMetadata": {
+              "detected_level": "info",
+              "event_name": "http.request.completed",
+              "flags": "1",
+              "http_request_method": "POST",
+              "http_response_status_code": "200",
+              "http_route": "/api/documents/process",
+              "observed_timestamp": "1789102406231000000",
+              "request_duration_ms": "52.062",
+              "request_id": "dc2de9be-f464-4013-95f7-c97b097d8c7f",
+              "request_outcome": "completed",
+              "scope_name": "document-lab.http",
+              "service_version": "0.1.0",
+              "severity_number": "9",
+              "severity_text": "INFO",
+              "span_id": "3359582a20ffe39a",
+              "trace_id": "89cff934cd72a4c837dcaee6ea7a8421"
+            }
+          },
+          {
+            "timestamp": "1789102406285000000",
+            "line": "HTTP request route_not_found",
+            "structuredMetadata": {
+              "detected_level": "warn",
+              "event_name": "http.request.completed",
+              "flags": "1",
+              "http_request_method": "GET",
+              "http_response_status_code": "404",
+              "observed_timestamp": "1789102406285000000",
+              "request_duration_ms": "0.443",
+              "request_id": "394b21db-bdf0-4e05-8f25-f1531b06d45f",
+              "request_outcome": "route_not_found",
+              "scope_name": "document-lab.http",
+              "service_version": "0.1.0",
+              "severity_number": "13",
+              "severity_text": "WARN",
+              "span_id": "3005ee4701076569",
+              "trace_id": "968b9b4fbc5be857ca6859c102eecce9"
+            }
+          },
+          {
+            "timestamp": "1789102406255000000",
+            "line": "HTTP request invalid_name",
+            "structuredMetadata": {
+              "detected_level": "warn",
+              "event_name": "http.request.completed",
+              "flags": "1",
+              "http_request_method": "POST",
+              "http_response_status_code": "400",
+              "http_route": "/api/documents/process",
+              "observed_timestamp": "1789102406255000000",
+              "request_duration_ms": "0.628",
+              "request_id": "25375de4-e587-4eb7-94cf-ec80075b06a9",
+              "request_outcome": "invalid_name",
+              "scope_name": "document-lab.http",
+              "service_version": "0.1.0",
+              "severity_number": "13",
+              "severity_text": "WARN",
+              "span_id": "4323bd3d921db876",
+              "trace_id": "caf28a3775003c5b7c35498729204c40"
+            }
+          },
+          {
+            "timestamp": "1789102406276000000",
+            "line": "HTTP request invalid_json",
+            "structuredMetadata": {
+              "detected_level": "warn",
+              "event_name": "http.request.completed",
+              "flags": "1",
+              "http_request_method": "POST",
+              "http_response_status_code": "400",
+              "http_route": "/api/documents/process",
+              "observed_timestamp": "1789102406276000000",
+              "request_duration_ms": "2.322",
+              "request_id": "e7ab17d3-c3a0-4619-a68a-2030fbff817f",
+              "request_outcome": "invalid_json",
+              "scope_name": "document-lab.http",
+              "service_version": "0.1.0",
+              "severity_number": "13",
+              "severity_text": "WARN",
+              "span_id": "56e2ea074cbb1066",
+              "trace_id": "20c78e7553a3a07f966439ca85ef0680"
+            }
+          }
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 15075,
+        "linesProcessedPerSecond": 99,
+        "totalBytesProcessed": 604,
+        "totalLinesProcessed": 4,
+        "execTime": 0.040065
+      }
+    }
+  }
+}

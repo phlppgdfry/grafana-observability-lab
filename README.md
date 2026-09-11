@@ -29,6 +29,10 @@ npm run check:traces
 
 Met het lab actief genereert `npm run demo:traffic` één begrensde demonstratie van 40 aanvragen. Dit is geen permanente verkeersgenerator.
 
+## Dag 4
+
+Applicatielogs staan in Grafana Loki met omgeving, release, vaste foutreden en trace-ID. De bestaande telemetrie-overlay activeert zowel logs als traces. Zie [zoekopdrachten en live bewijs](docs/day-04.md) en [logconfiguratie](telemetry/logs.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

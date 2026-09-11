@@ -1,0 +1,4 @@
+{"path":"/api/documents/process","status":200,"traceId":"89cff934cd72a4c837dcaee6ea7a8421"}
+{"path":"/api/documents/process","status":400,"traceId":"caf28a3775003c5b7c35498729204c40"}
+{"path":"/api/documents/process","status":400,"traceId":"20c78e7553a3a07f966439ca85ef0680"}
+{"path":"/missing","status":404,"traceId":"968b9b4fbc5be857ca6859c102eecce9"}

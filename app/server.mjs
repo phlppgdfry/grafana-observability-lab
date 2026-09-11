@@ -1,45 +1,50 @@
+import { logRequest, shutdownLogging } from '../telemetry/logging.mjs';
+import { serviceAttributes } from '../telemetry/config.mjs';
 import { shutdownTracing } from '../telemetry/tracing.mjs';
 import { context, propagation, trace, SpanKind, SpanStatusCode, isSpanContextValid } from '@opentelemetry/api';
 import http from 'node:http';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
-export function createServer() {
+export function createServer({ requestLogger = logRequest } = {}) {
   const started = Date.now();
   return http.createServer((req, res) => {
     const pathname = new URL(req.url, 'http://localhost').pathname;
     const route = ['/health', '/', '/api/documents/process'].includes(pathname) ? pathname : undefined;
+    const requestId = randomUUID();
+    const requestStarted = performance.now();
+    let outcome = 'completed';
     const handle = async () => {
-      const requestId = randomUUID();
-      const send = (status, data) => {
+      const send = (status, data, reason = 'completed') => {
+        outcome = reason;
         res.writeHead(status, { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-request-id': requestId });
         res.end(JSON.stringify(data));
       };
       if (req.method === 'GET' && pathname === '/health') {
-        return send(200, { status: 'ok', service: 'document-lab', version: '0.1.0', uptimeSeconds: Math.floor((Date.now() - started) / 1000) });
+        return send(200, { status: 'ok', service: 'document-lab', version: serviceAttributes['service.version'], uptimeSeconds: Math.floor((Date.now() - started) / 1000) });
       }
       if (req.method === 'GET' && pathname === '/') {
-        return send(200, { service: 'document-lab', endpoints: ['GET /health', 'POST /api/documents/process'], stage: 'day-2' });
+        return send(200, { service: 'document-lab', endpoints: ['GET /health', 'POST /api/documents/process'], stage: 'day-4' });
       }
       if (req.method === 'POST' && pathname === '/api/documents/process') {
         let body = '';
         try {
           for await (const chunk of req) {
             body += chunk;
-            if (Buffer.byteLength(body) > 16384) return send(413, { error: 'Payload too large' });
+            if (Buffer.byteLength(body) > 16384) return send(413, { error: 'Payload too large' }, 'payload_too_large');
           }
           const input = JSON.parse(body);
           if (typeof input?.name !== 'string' || !input.name.trim() || input.name.length > 120) {
-            return send(400, { error: 'name must be a non-empty string of at most 120 characters' });
+            return send(400, { error: 'name must be a non-empty string of at most 120 characters' }, 'invalid_name');
           }
           // Synthetic processing only: no files, personal data or persistence.
           await new Promise(resolve => setTimeout(resolve, 40));
           return send(200, { documentId: randomUUID(), status: 'completed', requestId });
         } catch {
-          return send(400, { error: 'Invalid JSON request' });
+          return send(400, { error: 'Invalid JSON request' }, 'invalid_json');
         }
       }
-      send(404, { error: 'Not found' });
+      send(404, { error: 'Not found' }, 'route_not_found');
     };
     // Health probes already have their own monitoring; avoid duplicate idle traffic.
     if (pathname === '/health') return handle();
@@ -63,12 +68,16 @@ export function createServer() {
             span.setAttribute('http.response.status_code', res.statusCode);
             if (res.statusCode >= 500) span.setStatus({ code: SpanStatusCode.ERROR });
           }
+          requestLogger({ method, route, status: res.writableFinished ? res.statusCode : undefined,
+            reason: res.writableFinished ? outcome : 'client_disconnect', requestId,
+            durationMs: performance.now() - requestStarted, span });
           span.end();
         };
         res.once('finish', end);
         res.once('close', end);
         try { await handle(); }
         catch {
+          outcome = 'internal_error';
           span.setStatus({ code: SpanStatusCode.ERROR });
           span.setAttribute('error.type', 'internal_error');
           if (!res.headersSent) res.writeHead(500, { 'content-type': 'application/json' });
@@ -91,7 +100,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     const deadline = setTimeout(() => process.exit(1), 9000);
     deadline.unref();
     server.close(async () => {
-      try { await shutdownTracing(); }
+      try { await Promise.all([shutdownTracing(), shutdownLogging()]); }
       catch { console.error('OpenTelemetry shutdown failed'); process.exitCode = 1; }
       clearTimeout(deadline);
     });

@@ -1,0 +1,71 @@
+{
+  "trace": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "deployment.environment.name",
+              "value": {
+                "stringValue": "lab"
+              }
+            },
+            {
+              "key": "service.version",
+              "value": {
+                "stringValue": "0.1.0"
+              }
+            },
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "document-lab"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "document-lab.http"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "http.request.method",
+                    "value": {
+                      "stringValue": "POST"
+                    }
+                  },
+                  {
+                    "key": "http.response.status_code",
+                    "value": {
+                      "intValue": "400"
+                    }
+                  },
+                  {
+                    "key": "http.route",
+                    "value": {
+                      "stringValue": "/api/documents/process"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789102406255621916",
+                "kind": "SPAN_KIND_SERVER",
+                "name": "POST /api/documents/process",
+                "spanId": "QyO9PZIduHY=",
+                "startTimeUnixNano": "1789102406255000000",
+                "status": {},
+                "traceId": "yvKKN3UAPFt8NUmHKSBMQA=="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "inspectedBytes": "22352"
+  }
+}
