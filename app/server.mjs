@@ -1,3 +1,4 @@
+import { processDocumentRequest, InputError, simulateProcessing } from './documents.mjs';
 import { logRequest, shutdownLogging } from '../telemetry/logging.mjs';
 import { serviceAttributes } from '../telemetry/config.mjs';
 import { shutdownTracing } from '../telemetry/tracing.mjs';
@@ -6,7 +7,7 @@ import http from 'node:http';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
-export function createServer({ requestLogger = logRequest } = {}) {
+export function createServer({ requestLogger = logRequest, processDocument = simulateProcessing } = {}) {
   const started = Date.now();
   return http.createServer((req, res) => {
     const pathname = new URL(req.url, 'http://localhost').pathname;
@@ -24,24 +25,15 @@ export function createServer({ requestLogger = logRequest } = {}) {
         return send(200, { status: 'ok', service: 'document-lab', version: serviceAttributes['service.version'], uptimeSeconds: Math.floor((Date.now() - started) / 1000) });
       }
       if (req.method === 'GET' && pathname === '/') {
-        return send(200, { service: 'document-lab', endpoints: ['GET /health', 'POST /api/documents/process'], stage: 'day-4' });
+        return send(200, { service: 'document-lab', endpoints: ['GET /health', 'POST /api/documents/process'], stage: 'day-5' });
       }
       if (req.method === 'POST' && pathname === '/api/documents/process') {
-        let body = '';
         try {
-          for await (const chunk of req) {
-            body += chunk;
-            if (Buffer.byteLength(body) > 16384) return send(413, { error: 'Payload too large' }, 'payload_too_large');
-          }
-          const input = JSON.parse(body);
-          if (typeof input?.name !== 'string' || !input.name.trim() || input.name.length > 120) {
-            return send(400, { error: 'name must be a non-empty string of at most 120 characters' }, 'invalid_name');
-          }
-          // Synthetic processing only: no files, personal data or persistence.
-          await new Promise(resolve => setTimeout(resolve, 40));
-          return send(200, { documentId: randomUUID(), status: 'completed', requestId });
-        } catch {
-          return send(400, { error: 'Invalid JSON request' }, 'invalid_json');
+          const documentId = await processDocumentRequest(req, processDocument);
+          return send(200, { documentId, status: 'completed', requestId });
+        } catch (error) {
+          if (error instanceof InputError) return send(error.status, { error: error.message }, error.reason);
+          throw error;
         }
       }
       send(404, { error: 'Not found' }, 'route_not_found');
@@ -80,7 +72,7 @@ export function createServer({ requestLogger = logRequest } = {}) {
           outcome = 'internal_error';
           span.setStatus({ code: SpanStatusCode.ERROR });
           span.setAttribute('error.type', 'internal_error');
-          if (!res.headersSent) res.writeHead(500, { 'content-type': 'application/json' });
+          if (!res.headersSent) res.writeHead(500, { 'content-type': 'application/json', 'x-request-id': requestId });
           res.end(JSON.stringify({ error: 'Internal server error' }));
         }
       },

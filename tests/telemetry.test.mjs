@@ -25,8 +25,16 @@ test('HTTP spans preserve context, status and privacy without tracing probes', a
   await health.text();
   assert.equal(health.headers.get('x-trace-id'), null);
   await provider.forceFlush();
-  const spans = exporter.getFinishedSpans();
+  const allSpans = exporter.getFinishedSpans();
+  const spans = allSpans.filter(s => s.kind === 1);
   assert.equal(spans.length, 3);
+  const children = allSpans.filter(s => s.spanContext().traceId === traceId && s.kind === 0);
+  assert.deepEqual(children.map(s => s.name), ['document.read_body', 'document.parse_json', 'document.validate', 'document.process']);
+  for (const child of children) assert.equal(child.parentSpanContext.spanId, spans[0].spanContext().spanId);
+  assert.ok(children.at(-1).duration[0] * 1e9 + children.at(-1).duration[1] >= 30e6);
+  const rejected = allSpans.filter(s => s.spanContext().traceId === spans[1].spanContext().traceId && s.kind === 0);
+  assert.deepEqual(rejected.map(s => s.name), ['document.read_body', 'document.parse_json', 'document.validate']);
+  assert.equal(rejected.at(-1).attributes['operation.outcome'], 'invalid_name');
   assert.deepEqual(spans.map(s => s.attributes['http.response.status_code']), [200, 400, 404]);
   assert.equal(spans[0].spanContext().traceId, traceId);
   assert.equal(spans[0].parentSpanContext.spanId, '1234567890abcdef');
@@ -35,5 +43,5 @@ test('HTTP spans preserve context, status and privacy without tracing probes', a
   assert.ok(spans[0].duration[0] * 1e9 + spans[0].duration[1] >= 30e6);
   assert.equal(spans[1].status.code, 0); // HTTP server 4xx is not a server fault.
   assert.equal(spans[2].attributes['http.route'], undefined);
-  assert.doesNotMatch(JSON.stringify(spans.map(s => ({ name: s.name, attributes: s.attributes }))), /private/);
+  assert.doesNotMatch(JSON.stringify(allSpans.map(s => ({ name: s.name, attributes: s.attributes }))), /private/);
 });

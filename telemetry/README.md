@@ -49,9 +49,27 @@ Ingestie en de zoekindex kunnen enige vertraging hebben. Een geslaagde API-aanvr
 - HTTP 4xx blijft een afwijzing door de API en krijgt geen SERVER-errorstatus; HTTP 5xx en verbroken verbindingen wel.
 - De standaard sampler bewaart alle roottraces en respecteert de samplingkeuze van een bovenliggende trace. Healthchecks worden uitgesloten om continu nutteloos traceverkeer te vermijden.
 - Bij SIGTERM/SIGINT sluit de server eerst aanvragen af en flusht daarna de exporter, binnen een afsluitlimiet van 9 seconden.
-- De buffer staat in geheugen. Langdurige netwerkuitval of abrupt stoppen kan traces verliezen. Er zijn nog geen afzonderlijke applicatiemetrics of interne verwerkingsspans. Logexport is toegevoegd op dag 4; zie [logging](logs.md).
+- De buffer staat in geheugen. Langdurige netwerkuitval of abrupt stoppen kan traces verliezen. Er zijn nog geen afzonderlijke applicatiemetrics. Interne verwerkingsspans zijn toegevoegd op dag 5. Logexport is toegevoegd op dag 4; zie [logging](logs.md).
 
 Bronnen: [OpenTelemetry JS-instrumentatie](https://opentelemetry.io/docs/languages/js/instrumentation/) en [Grafana OTLP-inname](https://grafana.com/docs/grafana-cloud/send-data/otlp/).
 
 
 Dag 4: [applicatielogs met omgeving, release en tracecontext](logs.md). De Compose-overlay activeert nu ook `OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`.
+
+## Dag 5 — stappen binnen één trace
+
+De documentroute maakt vier opeenvolgende INTERNAL-spans onder de HTTP SERVER-span:
+
+```text
+POST /api/documents/process (SERVER)
+├── document.read_body
+├── document.parse_json
+├── document.validate
+└── document.process  [document.processing.mode=simulation]
+```
+
+Alle stappen delen de trace-ID en verwijzen met hun parent-span-ID naar de HTTP-span. Het requestlog blijft aan de HTTP-span gekoppeld. Bij ongeldige JSON stopt de flow na `document.parse_json`; bij een ontbrekende naam na `document.validate`. Iedere gestarte span wordt in `finally` beëindigd.
+
+`operation.outcome` geeft een vaste, veilige uitkomst. Verwachte invoerafwijzingen krijgen geen interne ERROR-status. Onverwachte verwerkingsfouten markeren de interne span én HTTP-span als ERROR en leveren een generieke HTTP 500 met ERROR-requestlog op. Exceptiontekst wordt niet geëxporteerd.
+
+De verwerking blijft een simulatie van circa 40 ms. Er is geen database of externe documentdienst toegevoegd. Het dag-3-dashboard selecteert `kind = server`, waardoor vier extra deelspans niet als vier extra aanvragen tellen.

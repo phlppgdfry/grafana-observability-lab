@@ -1,0 +1,47 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "deployment_environment_name": "lab",
+          "service_name": "document-lab"
+        },
+        "values": [
+          {
+            "timestamp": "1789184488107000000",
+            "line": "HTTP request completed",
+            "structuredMetadata": {
+              "detected_level": "info",
+              "event_name": "http.request.completed",
+              "flags": "1",
+              "http_request_method": "POST",
+              "http_response_status_code": "200",
+              "http_route": "/api/documents/process",
+              "observed_timestamp": "1789184488107000000",
+              "request_duration_ms": "59.378",
+              "request_id": "67f6bdab-0bdf-46e0-a94d-e78264c51753",
+              "request_outcome": "completed",
+              "scope_name": "document-lab.http",
+              "service_version": "0.1.0",
+              "severity_number": "9",
+              "severity_text": "INFO",
+              "span_id": "8c30314c51a757d0",
+              "trace_id": "916ddda60b2d31a4a3485649b7cfba3e"
+            }
+          }
+        ]
+      }
+    ],
+    "stats": {
+      "summary": {
+        "bytesProcessedPerSecond": 24152,
+        "linesProcessedPerSecond": 159,
+        "totalBytesProcessed": 604,
+        "totalLinesProcessed": 4,
+        "execTime": 0.025008
+      }
+    }
+  }
+}

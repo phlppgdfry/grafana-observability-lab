@@ -33,6 +33,10 @@ Met het lab actief genereert `npm run demo:traffic` één begrensde demonstratie
 
 Applicatielogs staan in Grafana Loki met omgeving, release, vaste foutreden en trace-ID. De bestaande telemetrie-overlay activeert zowel logs als traces. Zie [zoekopdrachten en live bewijs](docs/day-04.md) en [logconfiguratie](telemetry/logs.md).
 
+## Dag 5
+
+De trace toont nu afzonderlijk het lezen, ontleden, valideren en verwerken van een documentaanvraag. Onverwachte verwerkingsfouten geven HTTP 500 en een ERROR-log; ongeldige invoer blijft HTTP 400. Zie [bewijs en uitleg](docs/day-05.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

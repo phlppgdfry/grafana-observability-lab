@@ -1,0 +1,132 @@
+{
+  "trace": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "deployment.environment.name",
+              "value": {
+                "stringValue": "lab"
+              }
+            },
+            {
+              "key": "service.version",
+              "value": {
+                "stringValue": "0.1.0"
+              }
+            },
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "document-lab"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "document-lab.processing"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488129655500",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.read_body",
+                "parentSpanId": "ggjpqLjgqqI=",
+                "spanId": "EeO26NtNaaQ=",
+                "startTimeUnixNano": "1789184488129000000",
+                "status": {},
+                "traceId": "5Nln42BUs6azP62OSLAAQw=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488130366416",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.parse_json",
+                "parentSpanId": "ggjpqLjgqqI=",
+                "spanId": "MLL6zr/NHGo=",
+                "startTimeUnixNano": "1789184488130000000",
+                "status": {},
+                "traceId": "5Nln42BUs6azP62OSLAAQw=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "invalid_name"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488131725542",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.validate",
+                "parentSpanId": "ggjpqLjgqqI=",
+                "spanId": "r6btvpSPGjo=",
+                "startTimeUnixNano": "1789184488130000000",
+                "status": {},
+                "traceId": "5Nln42BUs6azP62OSLAAQw=="
+              }
+            ]
+          },
+          {
+            "scope": {
+              "name": "document-lab.http"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "http.request.method",
+                    "value": {
+                      "stringValue": "POST"
+                    }
+                  },
+                  {
+                    "key": "http.response.status_code",
+                    "value": {
+                      "intValue": "400"
+                    }
+                  },
+                  {
+                    "key": "http.route",
+                    "value": {
+                      "stringValue": "/api/documents/process"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488134072084",
+                "kind": "SPAN_KIND_SERVER",
+                "name": "POST /api/documents/process",
+                "spanId": "ggjpqLjgqqI=",
+                "startTimeUnixNano": "1789184488129000000",
+                "status": {},
+                "traceId": "5Nln42BUs6azP62OSLAAQw=="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "inspectedBytes": "48786"
+  }
+}

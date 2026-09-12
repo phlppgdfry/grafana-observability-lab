@@ -1,0 +1,156 @@
+{
+  "trace": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "deployment.environment.name",
+              "value": {
+                "stringValue": "lab"
+              }
+            },
+            {
+              "key": "service.version",
+              "value": {
+                "stringValue": "0.1.0"
+              }
+            },
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "document-lab"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "document-lab.http"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "http.request.method",
+                    "value": {
+                      "stringValue": "POST"
+                    }
+                  },
+                  {
+                    "key": "http.response.status_code",
+                    "value": {
+                      "intValue": "200"
+                    }
+                  },
+                  {
+                    "key": "http.route",
+                    "value": {
+                      "stringValue": "/api/documents/process"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488107959875",
+                "kind": "SPAN_KIND_SERVER",
+                "name": "POST /api/documents/process",
+                "spanId": "jDAxTFGnV9A=",
+                "startTimeUnixNano": "1789184488050000000",
+                "status": {},
+                "traceId": "kW3dpgstMaSjSFZJt8+6Pg=="
+              }
+            ]
+          },
+          {
+            "scope": {
+              "name": "document-lab.processing"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488056813542",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.read_body",
+                "parentSpanId": "jDAxTFGnV9A=",
+                "spanId": "4Ll1hp/nuI4=",
+                "startTimeUnixNano": "1789184488052000000",
+                "status": {},
+                "traceId": "kW3dpgstMaSjSFZJt8+6Pg=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "document.processing.mode",
+                    "value": {
+                      "stringValue": "simulation"
+                    }
+                  },
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488098874333",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.process",
+                "parentSpanId": "jDAxTFGnV9A=",
+                "spanId": "LX6YO3P/EiY=",
+                "startTimeUnixNano": "1789184488057000000",
+                "status": {},
+                "traceId": "kW3dpgstMaSjSFZJt8+6Pg=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488057074959",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.parse_json",
+                "parentSpanId": "jDAxTFGnV9A=",
+                "spanId": "i5sjZ+0KN/4=",
+                "startTimeUnixNano": "1789184488057000000",
+                "status": {},
+                "traceId": "kW3dpgstMaSjSFZJt8+6Pg=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789184488057046833",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.validate",
+                "parentSpanId": "jDAxTFGnV9A=",
+                "spanId": "6mGPGbyDi3o=",
+                "startTimeUnixNano": "1789184488057000000",
+                "status": {},
+                "traceId": "kW3dpgstMaSjSFZJt8+6Pg=="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "inspectedBytes": "48786"
+  }
+}

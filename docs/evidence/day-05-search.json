@@ -1,0 +1,32 @@
+{
+  "traces": [
+    {
+      "traceID": "c4c72b18b5c072b30288c3b4e475a030",
+      "rootServiceName": "document-lab",
+      "rootTraceName": "GET",
+      "startTimeUnixNano": "1789184488161000000",
+      "durationMs": 1
+    },
+    {
+      "traceID": "9b64eaa8998bc786a915b8d60f4d95fc",
+      "rootServiceName": "document-lab",
+      "rootTraceName": "POST /api/documents/process",
+      "startTimeUnixNano": "1789184488151000000",
+      "durationMs": 3
+    },
+    {
+      "traceID": "e4d967e36054b3a6b33fad8e48b00043",
+      "rootServiceName": "document-lab",
+      "rootTraceName": "POST /api/documents/process",
+      "startTimeUnixNano": "1789184488129000000",
+      "durationMs": 5
+    },
+    {
+      "traceID": "916ddda60b2d31a4a3485649b7cfba3e",
+      "rootServiceName": "document-lab",
+      "rootTraceName": "POST /api/documents/process",
+      "startTimeUnixNano": "1789184488050000000",
+      "durationMs": 57
+    }
+  ]
+}

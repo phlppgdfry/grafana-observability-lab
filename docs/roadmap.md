@@ -6,7 +6,7 @@
 | 2 | OpenTelemetry op API-flow — voltooid | Echte 200/400/404-aanvragen in Grafana Tempo; [bewijs](day-02.md) |
 | 3 | Verkeer, fouten en responstijden — voltooid | [Live dashboard en bewijs](day-03.md): 40 aanvragen, 20% afwijzingen, p95 56,4 ms |
 | 4 | Logs met omgeving en release — voltooid | [Logs en tracecorrelatie geverifieerd in Loki](day-04.md) |
-| 5 | Traces uitbreiden naar verwerking/dependencies | Aanvraag volgen |
+| 5 | Traces uitbreiden naar verwerking — voltooid | [Vier interne stappen en foutpaden geverifieerd](day-05.md) |
 | 6 | Meldingen configureren en testen | Waarschuwing ontvangen |
 | 7 | Gebruikersflow automatisch testen | Functionele controle; browsermonitoring alleen indien UI toegevoegd |
 | 8 | Representatieve k6-test | Nulmeting |
