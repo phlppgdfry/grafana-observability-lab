@@ -1,4 +1,4 @@
-# Dag 6 — Meldingsregels en e-mail actief; inboxbevestiging nog open
+# Dag 6 — Voltooid
 
 Test: 12 september 2026. Herstelcontrole: 13 september 2026.
 
@@ -26,13 +26,13 @@ Zie [uitgevoerde scenario's](evidence/day-06-scenarios.jsonl) en [evaluatiegesch
 
 Op 13 september zijn alle drie de regels weer `inactive` met health `ok`; de API-healthcheck slaagt en de app-container is gezond. Zie [herstelstatus](evidence/day-06-restored-state.json).
 
-## Nog nodig voor volledige afronding
+## E-mailverzending en ontvangst bevestigd
 
 Op 13 september is het door de gebruiker opgegeven e-mailadres als contactpunt `document-lab-email` ingesteld. Het komt overeen met het e-mailadres van de aangemelde Grafana-gebruiker. Alle drie de regels zijn rechtstreeks gekoppeld aan dit contactpunt, zonder de algemene routeringsboom te vervangen.
 
 Een herkenbare testmelding **Document Lab - dag 6 TEST** is verstuurd. Grafana antwoordde `status: success` (1,350 seconde). Zie [verzendresultaat](evidence/day-06-email-test-result.json) en [teruggelezen regelroutering](evidence/day-06-routing.json). Groeperingswachttijd: 30 seconden; herhaling: 24 uur; herstelmeldingen ingeschakeld.
 
-Alle configuratie en technische tests zijn afgerond. Alleen bevestiging door de gebruiker dat de testmail in de inbox of spammap aankomt staat nog open. Een succesvolle verzend-API-respons bewijst die inboxontvangst niet automatisch. Het e-mailadres is uitsluitend lokaal en in Grafana opgeslagen, niet in de repo.
+De gebruiker heeft op 13 september bevestigd dat de testmail is ontvangen in de spammap. Daarmee zijn configuratie, regelactivatie, herstel, testverzending en ontvangst gecontroleerd. Dag 6 is volledig afgerond. De mail als geen spam markeren helpt de waarschuwingen terug te vinden; plaatsing in de inbox wordt daarmee niet gegarandeerd. Het e-mailadres is uitsluitend lokaal en in Grafana opgeslagen, niet in de repo.
 
 ## Bron en beheer
 

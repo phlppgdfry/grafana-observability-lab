@@ -19,7 +19,7 @@ De drempels zijn bedoeld voor dit lab, niet als productie-SLO. HTTP 400/404 zijn
 
 ## Notificaties
 
-Alle drie de regels zijn rechtstreeks gekoppeld aan `document-lab-email`. Het door de gebruiker opgegeven accountadres is lokaal ingesteld. Grafana heeft de testverzending succesvol uitgevoerd; bevestiging van ontvangst in de inbox staat nog open. Bewaar contactpuntconfiguratie met persoonsgegevens uitsluitend in `.local/`, niet in Git. Pas na een geslaagde verzending én ontvangstcontrole geldt dag 6 als volledig voltooid.
+Alle drie de regels zijn rechtstreeks gekoppeld aan `document-lab-email`. Het door de gebruiker opgegeven accountadres is lokaal ingesteld. Grafana heeft de testverzending succesvol uitgevoerd; de gebruiker heeft ontvangst in de spammap bevestigd op 13 september 2026. Bewaar contactpuntconfiguratie met persoonsgegevens uitsluitend in `.local/`, niet in Git. Verzending en ontvangstcontrole zijn geslaagd: dag 6 is volledig voltooid.
 
 Een specifiek labcontactpunt kan per regel worden gekoppeld met `notificationSettings` (`SimplifiedRouting`). Dat voorkomt wijzigingen aan de algemene notificatieroutering. Generator na configuratie:
 

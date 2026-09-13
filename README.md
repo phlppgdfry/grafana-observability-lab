@@ -39,7 +39,7 @@ De trace toont nu afzonderlijk het lezen, ontleden, valideren en verwerken van e
 
 ## Dag 6
 
-Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaakt in Grafana. E-mail is ingesteld en de testverzending is geslaagd; alleen inboxbevestiging staat nog open. Zie [dag 6](docs/day-06.md) en [het meldingsrunbook](alerts/README.md).
+Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaakt in Grafana. E-mail is ingesteld; testverzending en ontvangst zijn bevestigd. De testmail kwam in de spammap aan. Zie [dag 6](docs/day-06.md) en [het meldingsrunbook](alerts/README.md).
 
 ## Starten
 
