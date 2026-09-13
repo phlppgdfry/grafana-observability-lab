@@ -1,0 +1,44 @@
+[
+  {
+    "rule": "document-lab-availability",
+    "notificationSettings": {
+      "groupBy": [
+        "alertname",
+        "grafana_folder"
+      ],
+      "groupInterval": "5m",
+      "groupWait": "30s",
+      "receiver": "document-lab-email",
+      "repeatInterval": "1d",
+      "type": "SimplifiedRouting"
+    }
+  },
+  {
+    "rule": "document-lab-latency",
+    "notificationSettings": {
+      "groupBy": [
+        "alertname",
+        "grafana_folder"
+      ],
+      "groupInterval": "5m",
+      "groupWait": "30s",
+      "receiver": "document-lab-email",
+      "repeatInterval": "1d",
+      "type": "SimplifiedRouting"
+    }
+  },
+  {
+    "rule": "document-lab-server-errors",
+    "notificationSettings": {
+      "groupBy": [
+        "alertname",
+        "grafana_folder"
+      ],
+      "groupInterval": "5m",
+      "groupWait": "30s",
+      "receiver": "document-lab-email",
+      "repeatInterval": "1d",
+      "type": "SimplifiedRouting"
+    }
+  }
+]

@@ -1,4 +1,4 @@
-# Dag 6 — Meldingsregels actief; ontvangstcontrole nog open
+# Dag 6 — Meldingsregels en e-mail actief; inboxbevestiging nog open
 
 Test: 12 september 2026. Herstelcontrole: 13 september 2026.
 
@@ -28,13 +28,11 @@ Op 13 september zijn alle drie de regels weer `inactive` met health `ok`; de API
 
 ## Nog nodig voor volledige afronding
 
-Grafana had geen contactpunten; de standaardroutering wees naar `empty`. Er is daarom nog geen e-mail verzonden. Het ontvangstadres is aan de gebruiker gevraagd. Dag 6 is pas volledig voltooid na:
+Op 13 september is het door de gebruiker opgegeven e-mailadres als contactpunt `document-lab-email` ingesteld. Het komt overeen met het e-mailadres van de aangemelde Grafana-gebruiker. Alle drie de regels zijn rechtstreeks gekoppeld aan dit contactpunt, zonder de algemene routeringsboom te vervangen.
 
-1. Het opgegeven adres als lokaal beheerd contactpunt instellen.
-2. De drie regels rechtstreeks aan dat contactpunt koppelen.
-3. Een duidelijk herkenbare testmelding versturen en de ontvangst bevestigen.
+Een herkenbare testmelding **Document Lab - dag 6 TEST** is verstuurd. Grafana antwoordde `status: success` (1,350 seconde). Zie [verzendresultaat](evidence/day-06-email-test-result.json) en [teruggelezen regelroutering](evidence/day-06-routing.json). Groeperingswachttijd: 30 seconden; herhaling: 24 uur; herstelmeldingen ingeschakeld.
 
-De regels kunnen nu al `Pending`/`Firing` worden, maar dat betekent nog niet dat iemand een waarschuwing ontvangt. Een succesvolle API-aanroep om een melding te versturen bewijst bovendien niet automatisch aflevering in de inbox.
+Alle configuratie en technische tests zijn afgerond. Alleen bevestiging door de gebruiker dat de testmail in de inbox of spammap aankomt staat nog open. Een succesvolle verzend-API-respons bewijst die inboxontvangst niet automatisch. Het e-mailadres is uitsluitend lokaal en in Grafana opgeslagen, niet in de repo.
 
 ## Bron en beheer
 

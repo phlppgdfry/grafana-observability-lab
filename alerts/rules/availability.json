@@ -75,6 +75,17 @@
           ]
         }
       }
+    },
+    "notificationSettings": {
+      "type": "SimplifiedRouting",
+      "receiver": "document-lab-email",
+      "groupBy": [
+        "alertname",
+        "grafana_folder"
+      ],
+      "groupWait": "30s",
+      "groupInterval": "5m",
+      "repeatInterval": "24h"
     }
   }
 }

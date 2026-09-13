@@ -16,6 +16,6 @@ for (const [key,title,ds,expr,threshold,pending,description] of definitions) {
    A:{datasourceUID:ds,relativeTimeRange:{from:'10m',to:'0s'},model},
    B:{datasourceUID:'__expr__',source:true,model:{refId:'B',type:'threshold',expression:'A',conditions:[{type:'query',query:{params:['A']},reducer:{type:'last',params:[]},evaluator:{type:'gt',params:[threshold]},operator:{type:'and'}}]}},
  }};
- if (process.env.LAB_ALERT_RECEIVER) spec.notificationSettings={type:'SimplifiedRouting',receiver:process.env.LAB_ALERT_RECEIVER,groupBy:['alertname','grafana_folder'],groupWait:'30s',groupInterval:'5m',repeatInterval:'24h'};
+ spec.notificationSettings={type:'SimplifiedRouting',receiver:process.env.LAB_ALERT_RECEIVER || 'document-lab-email',groupBy:['alertname','grafana_folder'],groupWait:'30s',groupInterval:'5m',repeatInterval:'24h'};
  writeFileSync(`alerts/rules/${key}.json`,JSON.stringify({apiVersion:'rules.alerting.grafana.app/v0alpha1',kind:'AlertRule',metadata:{name:`document-lab-${key}`,annotations:{'grafana.app/folder':'grafana-observability-lab'}},spec},null,2)+'\n');
 }

@@ -19,7 +19,7 @@ De drempels zijn bedoeld voor dit lab, niet als productie-SLO. HTTP 400/404 zijn
 
 ## Notificaties
 
-De regels kunnen zonder ontvanger evalueren, maar dan wordt geen e-mail verstuurd. Het ontvangstadres moet door de gebruiker worden opgegeven. Bewaar contactpuntconfiguratie met persoonsgegevens uitsluitend in `.local/`, niet in Git. Pas na een geslaagde verzending én ontvangstcontrole geldt dag 6 als volledig voltooid.
+Alle drie de regels zijn rechtstreeks gekoppeld aan `document-lab-email`. Het door de gebruiker opgegeven accountadres is lokaal ingesteld. Grafana heeft de testverzending succesvol uitgevoerd; bevestiging van ontvangst in de inbox staat nog open. Bewaar contactpuntconfiguratie met persoonsgegevens uitsluitend in `.local/`, niet in Git. Pas na een geslaagde verzending én ontvangstcontrole geldt dag 6 als volledig voltooid.
 
 Een specifiek labcontactpunt kan per regel worden gekoppeld met `notificationSettings` (`SimplifiedRouting`). Dat voorkomt wijzigingen aan de algemene notificatieroutering. Generator na configuratie:
 
@@ -28,7 +28,7 @@ LAB_ALERT_RECEIVER=document-lab-email node scripts/build-day-06-alerts.mjs
 gcx resources push -p alerts/rules --context lab
 ```
 
-Zonder `LAB_ALERT_RECEIVER` genereert het script regels met de standaardroutering. Gebruik dat niet om een al ingestelde directe ontvanger te verwijderen. De gewenste standaard is 30 seconden groeperingswachttijd en maximaal één herhaling per 24 uur per aanhoudende melding; herstelmeldingen blijven mogelijk.
+Zonder `LAB_ALERT_RECEIVER` gebruikt de generator standaard `document-lab-email`, zodat opnieuw genereren de directe ontvanger behoudt. De gewenste standaard is 30 seconden groeperingswachttijd en maximaal één herhaling per 24 uur per aanhoudende melding; herstelmeldingen blijven mogelijk.
 
 ## Valideren en toepassen
 

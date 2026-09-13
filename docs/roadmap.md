@@ -7,7 +7,7 @@
 | 3 | Verkeer, fouten en responstijden — voltooid | [Live dashboard en bewijs](day-03.md): 40 aanvragen, 20% afwijzingen, p95 56,4 ms |
 | 4 | Logs met omgeving en release — voltooid | [Logs en tracecorrelatie geverifieerd in Loki](day-04.md) |
 | 5 | Traces uitbreiden naar verwerking — voltooid | [Vier interne stappen en foutpaden geverifieerd](day-05.md) |
-| 6 | Meldingsregels actief; ontvanger nog nodig | [Evaluatietest](day-06.md); verzending en ontvangst nog open |
+| 6 | Meldingsregels en e-mail actief | [Evaluatie en testverzending geslaagd](day-06.md); inboxbevestiging nog open |
 | 7 | Gebruikersflow automatisch testen | Functionele controle; browsermonitoring alleen indien UI toegevoegd |
 | 8 | Representatieve k6-test | Nulmeting |
 | 9 | Gecontroleerd belasting verhogen | Prestatiegrens gevonden |
