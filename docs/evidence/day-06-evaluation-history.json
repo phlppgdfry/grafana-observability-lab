@@ -1,0 +1,1127 @@
+[
+  {
+    "checkedAt": 1789245796.917584,
+    "rules": [
+      {
+        "state": "inactive",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:42:20Z",
+        "evaluationTime": 0.201351632,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Normal",
+            "activeAt": "2026-09-12T20:41:20Z",
+            "value": ""
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "inactive",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:42:50Z",
+        "evaluationTime": 0.255430555,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "datasource_uid": "grafanacloud-logs",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "ref_id": "A",
+              "severity": "warning"
+            },
+            "annotations": {
+              "datasource_uid": "grafanacloud-logs",
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "ref_id": "A",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Normal (NoData)",
+            "activeAt": "2026-09-12T20:40:50Z",
+            "value": ""
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "inactive",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:42:20Z",
+        "evaluationTime": 0.061966106,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Normal",
+            "activeAt": "2026-09-12T20:41:20Z",
+            "value": ""
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789245829.363421,
+    "rules": [
+      {
+        "state": "inactive",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:43:20Z",
+        "evaluationTime": 0.173031761,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Normal",
+            "activeAt": "2026-09-12T20:41:20Z",
+            "value": ""
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "inactive",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:42:50Z",
+        "evaluationTime": 0.255430555,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "datasource_uid": "grafanacloud-logs",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "ref_id": "A",
+              "severity": "warning"
+            },
+            "annotations": {
+              "datasource_uid": "grafanacloud-logs",
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "ref_id": "A",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Normal (NoData)",
+            "activeAt": "2026-09-12T20:40:50Z",
+            "value": ""
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:43:20Z",
+        "evaluationTime": 0.035122152,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789245861.3253708,
+    "rules": [
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:44:20Z",
+        "evaluationTime": 0.122793296,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:44:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:43:50Z",
+        "evaluationTime": 0.209765548,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "datasource_uid": "grafanacloud-logs",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "ref_id": "A",
+              "severity": "warning"
+            },
+            "annotations": {
+              "datasource_uid": "grafanacloud-logs",
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "ref_id": "A",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Normal (NoData)",
+            "activeAt": "2026-09-12T20:40:50Z",
+            "value": ""
+          },
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:50Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:43:20Z",
+        "evaluationTime": 0.035122152,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789245893.5990112,
+    "rules": [
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:44:20Z",
+        "evaluationTime": 0.122793296,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:44:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:44:50Z",
+        "evaluationTime": 0.294259728,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:50Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:44:20Z",
+        "evaluationTime": 0.027389477,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789245925.277612,
+    "rules": [
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:45:20Z",
+        "evaluationTime": 0.127559658,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:44:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:44:50Z",
+        "evaluationTime": 0.294259728,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:50Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:44:20Z",
+        "evaluationTime": 0.027389477,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789245956.8420732,
+    "rules": [
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:45:20Z",
+        "evaluationTime": 0.127559658,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:44:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:45:50Z",
+        "evaluationTime": 0.146292238,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:50Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "firing",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:45:20Z",
+        "evaluationTime": 0.036603388,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Alerting",
+            "activeAt": "2026-09-12T20:45:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789245989.31536,
+    "rules": [
+      {
+        "state": "firing",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:46:20Z",
+        "evaluationTime": 0.205641015,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Alerting",
+            "activeAt": "2026-09-12T20:46:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "pending",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:45:50Z",
+        "evaluationTime": 0.146292238,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Pending",
+            "activeAt": "2026-09-12T20:43:50Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "firing",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:46:20Z",
+        "evaluationTime": 0.039391341,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Alerting",
+            "activeAt": "2026-09-12T20:45:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  },
+  {
+    "checkedAt": 1789246021.458622,
+    "rules": [
+      {
+        "state": "firing",
+        "name": "Document Lab \u00b7 API of probe onbereikbaar",
+        "uid": "document-lab-availability",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+        "lastEvaluation": "2026-09-12T20:46:20Z",
+        "evaluationTime": 0.205641015,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 API of probe onbereikbaar",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 API of probe onbereikbaar"
+            },
+            "state": "Alerting",
+            "activeAt": "2026-09-12T20:46:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ]
+      },
+      {
+        "state": "firing",
+        "name": "Document Lab \u00b7 Trage documentverwerking",
+        "uid": "document-lab-latency",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+        "lastEvaluation": "2026-09-12T20:46:50Z",
+        "evaluationTime": 0.086570023,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Trage documentverwerking"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Trage documentverwerking",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Trage documentverwerking"
+            },
+            "state": "Alerting",
+            "activeAt": "2026-09-12T20:46:50Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      },
+      {
+        "state": "firing",
+        "name": "Document Lab \u00b7 Aanhoudende serverfouten",
+        "uid": "document-lab-server-errors",
+        "folderUid": "grafana-observability-lab",
+        "health": "ok",
+        "type": "alerting",
+        "query": "sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_response_status_code >= 500 [5m])) or vector(0)",
+        "lastEvaluation": "2026-09-12T20:46:20Z",
+        "evaluationTime": 0.039391341,
+        "isPaused": false,
+        "labels": {
+          "environment": "lab",
+          "project": "document-lab",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+          "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+          "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+        },
+        "alerts": [
+          {
+            "labels": {
+              "alertname": "Document Lab \u00b7 Aanhoudende serverfouten",
+              "environment": "lab",
+              "grafana_folder": "Grafana Observability Lab",
+              "project": "document-lab",
+              "severity": "warning"
+            },
+            "annotations": {
+              "description": "Minstens 3 HTTP 5xx-antwoorden in 5 minuten, gedurende 2 minuten. Zoek ERROR-logs en bijbehorende traces. HTTP 4xx telt niet mee.",
+              "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md",
+              "summary": "Document Lab \u00b7 Aanhoudende serverfouten"
+            },
+            "state": "Alerting",
+            "activeAt": "2026-09-12T20:45:20Z",
+            "value": "1e+00"
+          }
+        ],
+        "queriedDatasourceUIDs": [
+          "grafanacloud-logs"
+        ]
+      }
+    ]
+  }
+]

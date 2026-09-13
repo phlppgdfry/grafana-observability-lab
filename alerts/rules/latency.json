@@ -1,0 +1,80 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "name": "document-lab-latency",
+    "annotations": {
+      "grafana.app/folder": "grafana-observability-lab"
+    }
+  },
+  "spec": {
+    "title": "Document Lab · Trage documentverwerking",
+    "trigger": {
+      "interval": "1m"
+    },
+    "for": "3m",
+    "noDataState": "Ok",
+    "execErrState": "Error",
+    "paused": false,
+    "labels": {
+      "project": "document-lab",
+      "environment": "lab",
+      "severity": "warning"
+    },
+    "annotations": {
+      "summary": "Document Lab · Trage documentverwerking",
+      "description": "p95 boven 250 ms gedurende 3 minuten, met minstens 10 geslaagde verwerkingen in 5 minuten. Labdrempel; nog geen productie-SLO.",
+      "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md"
+    },
+    "expressions": {
+      "A": {
+        "datasourceUID": "grafanacloud-logs",
+        "relativeTimeRange": {
+          "from": "10m",
+          "to": "0s"
+        },
+        "model": {
+          "refId": "A",
+          "expr": "(quantile_over_time(0.95, {service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" | unwrap request_duration_ms | __error__=\"\" [5m]) by ()) and (sum(count_over_time({service_name=\"document-lab\",deployment_environment_name=\"lab\"} | http_route=\"/api/documents/process\" | http_response_status_code=\"200\" [5m])) >= 10)",
+          "instant": true,
+          "range": false,
+          "queryType": "instant",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200
+        }
+      },
+      "B": {
+        "datasourceUID": "__expr__",
+        "source": true,
+        "model": {
+          "refId": "B",
+          "type": "threshold",
+          "expression": "A",
+          "conditions": [
+            {
+              "type": "query",
+              "query": {
+                "params": [
+                  "A"
+                ]
+              },
+              "reducer": {
+                "type": "last",
+                "params": []
+              },
+              "evaluator": {
+                "type": "gt",
+                "params": [
+                  250
+                ]
+              },
+              "operator": {
+                "type": "and"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

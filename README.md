@@ -37,6 +37,10 @@ Applicatielogs staan in Grafana Loki met omgeving, release, vaste foutreden en t
 
 De trace toont nu afzonderlijk het lezen, ontleden, valideren en verwerken van een documentaanvraag. Onverwachte verwerkingsfouten geven HTTP 500 en een ERROR-log; ongeldige invoer blijft HTTP 400. Zie [bewijs en uitleg](docs/day-05.md).
 
+## Dag 6
+
+Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaakt in Grafana. Het ontvangstadres en de ontvangstcontrole staan nog open. Zie [dag 6](docs/day-06.md) en [het meldingsrunbook](alerts/README.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

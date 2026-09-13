@@ -1,0 +1,80 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "name": "document-lab-availability",
+    "annotations": {
+      "grafana.app/folder": "grafana-observability-lab"
+    }
+  },
+  "spec": {
+    "title": "Document Lab · API of probe onbereikbaar",
+    "trigger": {
+      "interval": "1m"
+    },
+    "for": "2m",
+    "noDataState": "NoData",
+    "execErrState": "Error",
+    "paused": false,
+    "labels": {
+      "project": "document-lab",
+      "environment": "lab",
+      "severity": "warning"
+    },
+    "annotations": {
+      "summary": "Document Lab · API of probe onbereikbaar",
+      "description": "Uitval gedurende 2 minuten, of minstens 5 minuten geen probemetingen plus 2 minuten wachttijd. Controleer Docker, Mac-slaapstand en API.",
+      "runbook_url": "https://github.com/phlppgdfry/grafana-observability-lab/blob/main/alerts/README.md"
+    },
+    "expressions": {
+      "A": {
+        "datasourceUID": "grafanacloud-prom",
+        "relativeTimeRange": {
+          "from": "10m",
+          "to": "0s"
+        },
+        "model": {
+          "refId": "A",
+          "expr": "(1 - max(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"})) or max(absent_over_time(probe_success{job=\"document-lab-health\",probe=\"document-lab-local\"}[5m]))",
+          "instant": true,
+          "range": false,
+          "queryType": "instant",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200
+        }
+      },
+      "B": {
+        "datasourceUID": "__expr__",
+        "source": true,
+        "model": {
+          "refId": "B",
+          "type": "threshold",
+          "expression": "A",
+          "conditions": [
+            {
+              "type": "query",
+              "query": {
+                "params": [
+                  "A"
+                ]
+              },
+              "reducer": {
+                "type": "last",
+                "params": []
+              },
+              "evaluator": {
+                "type": "gt",
+                "params": [
+                  0
+                ]
+              },
+              "operator": {
+                "type": "and"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
