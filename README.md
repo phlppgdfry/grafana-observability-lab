@@ -41,6 +41,10 @@ De trace toont nu afzonderlijk het lezen, ontleden, valideren en verwerken van e
 
 Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaakt in Grafana. E-mail is ingesteld; testverzending en ontvangst zijn bevestigd. De testmail kwam in de spammap aan. Zie [dag 6](docs/day-06.md) en [het meldingsrunbook](alerts/README.md).
 
+## Dag 7
+
+`npm run check:flow` controleert de volledige documentflow via 12 HTTP-stappen, inclusief antwoorden, IDs, invoerfouten en herstel. Dezelfde controle draait automatisch in GitHub Actions bij iedere push en pull request. Zie [dag 7](docs/day-07.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

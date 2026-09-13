@@ -1,0 +1,91 @@
+{
+  "check": "document-user-flow",
+  "status": "pass",
+  "startedAt": "2026-09-13T10:04:37.530Z",
+  "finishedAt": "2026-09-13T10:04:38.049Z",
+  "steps": 12,
+  "results": [
+    {
+      "step": "health-before",
+      "status": 200,
+      "durationMs": 150,
+      "requestId": "613ccb3e-2c07-4ab3-a83b-40e3d26ca447"
+    },
+    {
+      "step": "valid-document",
+      "status": 200,
+      "durationMs": 125,
+      "requestId": "194df579-4872-4009-8752-51065cc2cdb1",
+      "traceId": "05cec52f1b8d2572dbbe6f8b9a0d48b4"
+    },
+    {
+      "step": "invalid-json",
+      "status": 400,
+      "durationMs": 27,
+      "requestId": "75aed45b-1696-467e-b5df-9d269d6ee44e",
+      "traceId": "699da4b80bfbaeea43ba16433d3832ea"
+    },
+    {
+      "step": "missing-name",
+      "status": 400,
+      "durationMs": 38,
+      "requestId": "6b32f0af-5cc9-4910-ad8b-4ef90743680f",
+      "traceId": "0935dcb2c34c0f22c124d816bcdb477d"
+    },
+    {
+      "step": "blank-name",
+      "status": 400,
+      "durationMs": 26,
+      "requestId": "e09494aa-aa1e-4ba7-bd12-fba94d4cae75",
+      "traceId": "0e3802c8f4279f7de47b0a3cb506494a"
+    },
+    {
+      "step": "wrong-name-type",
+      "status": 400,
+      "durationMs": 23,
+      "requestId": "584fb85b-8dff-4aeb-9cc0-3f5e974e6e4e",
+      "traceId": "e5cb6642db7afbde99c7b14e0827a095"
+    },
+    {
+      "step": "name-too-long",
+      "status": 400,
+      "durationMs": 21,
+      "requestId": "8378f6cd-4ca7-4d9a-9e62-e68b24418aa4",
+      "traceId": "0d830e9c252974f521f2ff7b254cce8b"
+    },
+    {
+      "step": "payload-too-large",
+      "status": 413,
+      "durationMs": 15,
+      "requestId": "9125f8e9-7355-4a61-abfe-dcb329b06f2d",
+      "traceId": "7aca6f5a343e21df0e843a809d00254f"
+    },
+    {
+      "step": "unknown-route",
+      "status": 404,
+      "durationMs": 6,
+      "requestId": "be29918b-b372-4123-90f9-cd4793d92c00",
+      "traceId": "c761a8f003991ba2c7d0b806fb1f707e"
+    },
+    {
+      "step": "wrong-method",
+      "status": 404,
+      "durationMs": 20,
+      "requestId": "a152d8df-0331-4b96-a858-8f9b8ffcefe7",
+      "traceId": "841262d8dfbec9a3dc886b0eefffddd9"
+    },
+    {
+      "step": "recovery-unicode",
+      "status": 200,
+      "durationMs": 55,
+      "requestId": "9e2bc77a-9c8c-4007-b52c-7bfaf0e5b314",
+      "traceId": "11ef4cfa2218a0840f1df679a0c82b1b"
+    },
+    {
+      "step": "health-after",
+      "status": 200,
+      "durationMs": 8,
+      "requestId": "4d9e5e37-7c1b-4319-a1e3-ffa38adf8feb"
+    }
+  ]
+}
