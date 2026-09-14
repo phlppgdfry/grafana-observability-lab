@@ -10,7 +10,7 @@
 | 6 | Meldingen configureren en testen — voltooid | [Regels geactiveerd, hersteld en testmail ontvangen](day-06.md), in spammap |
 | 7 | Gebruikersflow automatisch testen — voltooid | [12 HTTP-stappen en automatische CI-controle](day-07.md) |
 | 8 | Begrensde k6-test — voltooid | [Nulmeting: 5 aanvragen/s, p95 56,6 ms, geen onverwachte fouten](day-08.md) |
-| 9 | Gecontroleerd belasting verhogen | Prestatiegrens gevonden |
+| 9 | Gecontroleerd belasting verhogen — voltooid | [Tot 1.000 aanvragen/s getest; binnen de testlimiet geen prestatiegrens gevonden](day-09.md) |
 | 10 | Tijdelijke fouten en vertraging | Detectie en diagnose bewezen |
 | 11 | Knelpunt verbeteren en hertesten | Vergelijkbare voor/na-meting |
 | 12 | Configuratie reproduceerbaar toepassen | Herhaalbare setup en workflows |

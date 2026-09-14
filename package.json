@@ -14,7 +14,8 @@
     "grafana": "node tests/gcx-with-token.mjs",
     "demo:traffic": "node tests/dashboard-traffic.mjs",
     "check:flow": "node tests/user-flow.mjs",
-    "perf:baseline": "mkdir -p test-results && k6 run --no-usage-report tests/baseline.k6.js"
+    "perf:baseline": "mkdir -p test-results && k6 run --no-usage-report tests/baseline.k6.js",
+    "perf:ladder": "node scripts/load-ladder.mjs"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",

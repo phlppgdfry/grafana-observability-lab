@@ -1,0 +1,66 @@
+{
+  "profile": "day-09-v1",
+  "startedAt": "2026-09-14T01:24:54.145Z",
+  "steps": [
+    {
+      "rate": 5,
+      "code": 0,
+      "signal": null,
+      "failed": [],
+      "requests": 100,
+      "p95Ms": 54.025999999999996,
+      "dropped": 0
+    },
+    {
+      "rate": 25,
+      "code": 0,
+      "signal": null,
+      "failed": [],
+      "requests": 500,
+      "p95Ms": 51.59269999999997,
+      "dropped": 0
+    },
+    {
+      "rate": 100,
+      "code": 0,
+      "signal": null,
+      "failed": [],
+      "requests": 2000,
+      "p95Ms": 49.72575,
+      "dropped": 0
+    },
+    {
+      "rate": 250,
+      "code": 0,
+      "signal": null,
+      "failed": [],
+      "requests": 5000,
+      "p95Ms": 45.5334,
+      "dropped": 0
+    },
+    {
+      "rate": 500,
+      "code": 0,
+      "signal": null,
+      "failed": [],
+      "requests": 10000,
+      "p95Ms": 48.78,
+      "dropped": 0
+    },
+    {
+      "rate": 1000,
+      "code": 0,
+      "signal": null,
+      "failed": [],
+      "requests": 20000,
+      "p95Ms": 46.337,
+      "dropped": 0
+    }
+  ],
+  "stop": "bounded-ceiling-reached",
+  "recovery": {
+    "code": 0,
+    "signal": null
+  },
+  "finishedAt": "2026-09-14T01:28:10.935Z"
+}

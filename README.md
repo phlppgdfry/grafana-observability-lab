@@ -49,6 +49,10 @@ Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaa
 
 `npm run perf:baseline` voert een begrensde lokale k6-test uit: opwarmen, daarna één minuut 5 aanvragen/s, met 90% geldige documenten en 10% verwachte afwijzingen. Het rapport controleert correctheid en p95-responstijd. Vereist k6 en een actieve API met telemetrie. Zie [profiel, nulmeting en herhalen](docs/day-08.md).
 
+## Dag 9
+
+`npm run perf:ladder` verhoogt het aanbod stapsgewijs van 5 naar maximaal 1.000 aanvragen/s. Elke stap heeft eigen criteria; bij een mislukte stap stopt de verhoging en volgt een volledige herstelmeting. Zie [werkwijze en resultaten](docs/day-09.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).
