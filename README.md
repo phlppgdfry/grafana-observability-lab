@@ -45,6 +45,10 @@ Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaa
 
 `npm run check:flow` controleert de volledige documentflow via 12 HTTP-stappen, inclusief antwoorden, IDs, invoerfouten en herstel. Dezelfde controle draait automatisch in GitHub Actions bij iedere push en pull request. Zie [dag 7](docs/day-07.md).
 
+## Dag 8
+
+`npm run perf:baseline` voert een begrensde lokale k6-test uit: opwarmen, daarna één minuut 5 aanvragen/s, met 90% geldige documenten en 10% verwachte afwijzingen. Het rapport controleert correctheid en p95-responstijd. Vereist k6 en een actieve API met telemetrie. Zie [profiel, nulmeting en herhalen](docs/day-08.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).
@@ -96,7 +100,7 @@ De actieve private-probe-configuratie staat in `docker-compose.monitoring.yml` e
 | `dashboards/` | Live dashboards voor bereikbaarheid en API-verkeer |
 | `alerts/` | Meldingsregels vanaf dag 6 |
 | `telemetry/` | OpenTelemetry-tracing en startinstructies |
-| `tests/` | Bereikbaarheidscheck en functionele tests; later k6 |
+| `tests/` | Bereikbaarheidscheck, functionele gebruikersflow en k6-nulmeting |
 | `experiments/` | Gecontroleerde foutscenario’s vanaf dag 10 |
 | `docs/` | Voortgang, architectuur en bewijs |
 | `.github/workflows/` | Automatische controles |

@@ -9,7 +9,7 @@
 | 5 | Traces uitbreiden naar verwerking — voltooid | [Vier interne stappen en foutpaden geverifieerd](day-05.md) |
 | 6 | Meldingen configureren en testen — voltooid | [Regels geactiveerd, hersteld en testmail ontvangen](day-06.md), in spammap |
 | 7 | Gebruikersflow automatisch testen — voltooid | [12 HTTP-stappen en automatische CI-controle](day-07.md) |
-| 8 | Representatieve k6-test | Nulmeting |
+| 8 | Begrensde k6-test — voltooid | [Nulmeting: 5 aanvragen/s, p95 56,6 ms, geen onverwachte fouten](day-08.md) |
 | 9 | Gecontroleerd belasting verhogen | Prestatiegrens gevonden |
 | 10 | Tijdelijke fouten en vertraging | Detectie en diagnose bewezen |
 | 11 | Knelpunt verbeteren en hertesten | Vergelijkbare voor/na-meting |
