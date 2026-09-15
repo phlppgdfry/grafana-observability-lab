@@ -57,6 +57,10 @@ Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaa
 
 `npm run experiment:faults` oefent vertraging, interne fouten en herstel op een tijdelijke lokale API. De runner volgt de bestaande Grafana-regels en controleert de oorzaak via gekoppelde logs en traces. Dit kan echte labwaarschuwingen sturen. Zie [uitvoering en diagnose](docs/day-10.md) en [het experimentrunbook](experiments/README.md).
 
+## Dag 11
+
+De API annuleert verwerking wanneer de client voortijdig de verbinding verbreekt. `npm run perf:cancellation` vergelijkt de oude en nieuwe code: verlaten werk stopt eerder, terwijl normale verwerking ongeveer even snel blijft. Zie [voor/na-meting en grenzen](docs/day-11.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

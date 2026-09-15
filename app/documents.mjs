@@ -1,31 +1,33 @@
 import { trace, SpanKind, SpanStatusCode } from '@opentelemetry/api';
 import { randomUUID } from 'node:crypto';
+import { setTimeout as sleep } from 'node:timers/promises';
 
 export class InputError extends Error {
   constructor(status, reason, message) { super(message); this.status = status; this.reason = reason; }
 }
-async function step(name, work) {
+async function step(name, work, signal) {
   return trace.getTracer('document-lab.processing').startActiveSpan(name, { kind: SpanKind.INTERNAL }, async span => {
     try {
       const result = await work();
       span.setAttribute('operation.outcome', 'completed');
       return result;
     } catch (error) {
-      span.setAttribute('operation.outcome', error instanceof InputError ? error.reason : 'internal_error');
+      const reason = signal?.aborted ? 'client_disconnect' : error instanceof InputError ? error.reason : 'internal_error';
+      span.setAttribute('operation.outcome', reason);
       if (!(error instanceof InputError)) {
         span.setStatus({ code: SpanStatusCode.ERROR });
-        span.setAttribute('error.type', 'internal_error');
+        span.setAttribute('error.type', reason);
       }
       // Never export arbitrary exception messages or document data.
       throw error;
     } finally { span.end(); }
   });
 }
-export async function simulateProcessing() {
-  await new Promise(resolve => setTimeout(resolve, 40));
+export async function simulateProcessing(signal) {
+  await sleep(40, undefined, { signal });
   return randomUUID();
 }
-export async function processDocumentRequest(req, processDocument = simulateProcessing) {
+export async function processDocumentRequest(req, processDocument = simulateProcessing, signal) {
   const body = await step('document.read_body', async () => {
     const chunks = [];
     let bytes = 0;
@@ -47,6 +49,7 @@ export async function processDocumentRequest(req, processDocument = simulateProc
   });
   return step('document.process', async () => {
     trace.getActiveSpan()?.setAttribute('document.processing.mode', 'simulation');
-    return processDocument();
-  });
+    signal?.throwIfAborted();
+    return processDocument(signal);
+  }, signal);
 }

@@ -12,7 +12,7 @@
 | 8 | Begrensde k6-test — voltooid | [Nulmeting: 5 aanvragen/s, p95 56,6 ms, geen onverwachte fouten](day-08.md) |
 | 9 | Gecontroleerd belasting verhogen — voltooid | [Tot 1.000 aanvragen/s getest; binnen de testlimiet geen prestatiegrens gevonden](day-09.md) |
 | 10 | Tijdelijke fouten en vertraging — voltooid | [Twee regels geactiveerd en hersteld; vier trace/log-diagnoses geverifieerd](day-10.md) |
-| 11 | Knelpunt verbeteren en hertesten | Vergelijkbare voor/na-meting |
+| 11 | Onnodige verwerking stoppen — voltooid | [Annulering: 29,73 → 1,04 ms resterende verwerking na verbreken verbinding](day-11.md) |
 | 12 | Configuratie reproduceerbaar toepassen | Herhaalbare setup en workflows |
 | 13 | Logs, metrics, sampling en frequenties afstellen | Verbruik afgestemd op blijvend plan |
 | 14 | Walkthrough, screenshots en architectuur | Toonbaar project |

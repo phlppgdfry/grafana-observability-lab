@@ -1,0 +1,604 @@
+{
+  "beforeCommit": "53568c1b2503808d80db38ba2d20f90e65e5bd60",
+  "node": "v26.8.1",
+  "platform": "darwin/x64",
+  "startedAt": "2026-09-15T01:37:15.866Z",
+  "telemetry": "disabled in both versions",
+  "samples": [
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.445875000000115,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.58662499999991,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.120082999999795,
+      "afterDisconnectMs": 28.80749999999989
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 12.848208999999997,
+      "afterDisconnectMs": 1.314290999999912
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.51354100000003,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.01762499999995,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.90604200000007,
+      "afterDisconnectMs": 0.6563750000000255
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.82291699999996,
+      "afterDisconnectMs": 30.531875000000127
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.24787500000002,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.71229200000016,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.60362499999974,
+      "afterDisconnectMs": 29.858374999999796
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 14.067375000000084,
+      "afterDisconnectMs": 2.128208000000086
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.38591700000006,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.454707999999755,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 14.524666999999681,
+      "afterDisconnectMs": 2.320832999999766
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.65866599999981,
+      "afterDisconnectMs": 30.331083000000035
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.484915999999885,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.48550000000023,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.88508299999967,
+      "afterDisconnectMs": 29.68587499999967
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.693624999999884,
+      "afterDisconnectMs": 0.48408299999982773
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.717375000000175,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.13758299999972,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 10.953125,
+      "afterDisconnectMs": 0.46808299999975134
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.32633299999998,
+      "afterDisconnectMs": 29.808125000000018
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.45683400000007,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.394874999999956,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.16437500000029,
+      "afterDisconnectMs": 29.625375000000076
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.95108399999981,
+      "afterDisconnectMs": 0.6683750000001965
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.739416999999776,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.83412500000031,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 16.274459000000206,
+      "afterDisconnectMs": 4.762499999999818
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.038125000000036,
+      "afterDisconnectMs": 29.839249999999993
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.588708000000224,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.420374999999694,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.12716599999976,
+      "afterDisconnectMs": 29.57791700000007
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 12.23658400000022,
+      "afterDisconnectMs": 0.8342500000003383
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.511833000000024,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.315708000000086,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 14.492209000000003,
+      "afterDisconnectMs": 1.9306249999999636
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.460749999999734,
+      "afterDisconnectMs": 27.88824999999997
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.16037499999993,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.60362500000019,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.95387500000015,
+      "afterDisconnectMs": 29.885375000000295
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.831000000000131,
+      "afterDisconnectMs": 0.37704200000007404
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.44179200000008,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.30799999999999,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 12.001625000000331,
+      "afterDisconnectMs": 0.47166699999979755
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.478583999999955,
+      "afterDisconnectMs": 29.56137499999977
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.350832999999966,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.25737499999968,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.314166000000114,
+      "afterDisconnectMs": 27.94341600000007
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.689792000000125,
+      "afterDisconnectMs": 0.4750829999998132
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.278957999999875,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.14008300000023,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.546832999999879,
+      "afterDisconnectMs": 0.35866699999996854
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.51445899999999,
+      "afterDisconnectMs": 29.95937499999991
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.189082999999755,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.21291599999995,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.601582999999664,
+      "afterDisconnectMs": 29.47629199999983
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 12.014208000000053,
+      "afterDisconnectMs": 0.6907500000002074
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.49241699999993,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.56395799999973,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 10.940375000000131,
+      "afterDisconnectMs": 0.4833749999997963
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.64716600000065,
+      "afterDisconnectMs": 30.45591599999989
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.05437500000062,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.66374999999971,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 40.92504199999985,
+      "afterDisconnectMs": 29.53108400000019
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.587082999999438,
+      "afterDisconnectMs": 0.6457090000003518
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.26970800000072,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.31825000000026,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.646999999999935,
+      "afterDisconnectMs": 0.35599999999976717
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.97833400000036,
+      "afterDisconnectMs": 30.521209000000454
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.16975000000002,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 39.687708000000384,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.82495800000015,
+      "afterDisconnectMs": 30.596166000000267
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.85979099999986,
+      "afterDisconnectMs": 0.6439579999996567
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 40.45629199999985,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": false,
+      "completed": true,
+      "processingMs": 41.28679100000045,
+      "afterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "completed": false,
+      "processingMs": 11.421041000000514,
+      "afterDisconnectMs": 0.6829159999997501
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "completed": true,
+      "processingMs": 41.13783300000068,
+      "afterDisconnectMs": 30.619040999999925
+    }
+  ],
+  "results": [
+    {
+      "version": "before",
+      "disconnect": false,
+      "count": 20,
+      "completed": 20,
+      "meanProcessingMs": 41.126272750000055,
+      "meanAfterDisconnectMs": null
+    },
+    {
+      "version": "before",
+      "disconnect": true,
+      "count": 20,
+      "completed": 20,
+      "meanProcessingMs": 41.02915615000002,
+      "meanAfterDisconnectMs": 29.72514370000001
+    },
+    {
+      "version": "after",
+      "disconnect": false,
+      "count": 20,
+      "completed": 20,
+      "meanProcessingMs": 41.09161455000002,
+      "meanAfterDisconnectMs": null
+    },
+    {
+      "version": "after",
+      "disconnect": true,
+      "count": 20,
+      "completed": 0,
+      "meanProcessingMs": 12.374306350000017,
+      "meanAfterDisconnectMs": 1.0376394999999434
+    }
+  ],
+  "finishedAt": "2026-09-15T01:37:19.207Z"
+}

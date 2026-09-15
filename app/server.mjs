@@ -10,6 +10,10 @@ import { pathToFileURL } from 'node:url';
 export function createServer({ requestLogger = logRequest, processDocument = simulateProcessing } = {}) {
   const started = Date.now();
   return http.createServer((req, res) => {
+    const cancellation = new AbortController();
+    res.once('close', () => {
+      if (!res.writableFinished) cancellation.abort();
+    });
     const pathname = new URL(req.url, 'http://localhost').pathname;
     const route = ['/health', '/', '/api/documents/process'].includes(pathname) ? pathname : undefined;
     const requestId = randomUUID();
@@ -29,7 +33,7 @@ export function createServer({ requestLogger = logRequest, processDocument = sim
       }
       if (req.method === 'POST' && pathname === '/api/documents/process') {
         try {
-          const documentId = await processDocumentRequest(req, processDocument);
+          const documentId = await processDocumentRequest(req, processDocument, cancellation.signal);
           return send(200, { documentId, status: 'completed', requestId });
         } catch (error) {
           if (error instanceof InputError) return send(error.status, { error: error.message }, error.reason);
@@ -54,6 +58,7 @@ export function createServer({ requestLogger = logRequest, processDocument = sim
           if (ended) return;
           ended = true;
           if (!res.writableFinished) {
+            outcome = 'client_disconnect';
             span.setAttribute('error.type', 'client_disconnect');
             span.setStatus({ code: SpanStatusCode.ERROR });
           } else {
@@ -69,6 +74,7 @@ export function createServer({ requestLogger = logRequest, processDocument = sim
         res.once('close', end);
         try { await handle(); }
         catch {
+          if (cancellation.signal.aborted) return;
           outcome = 'internal_error';
           span.setStatus({ code: SpanStatusCode.ERROR });
           span.setAttribute('error.type', 'internal_error');

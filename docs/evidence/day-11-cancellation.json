@@ -1,0 +1,196 @@
+{
+  "traceId": "a6ce3ca55e396b989ee9d43cafa667dc",
+  "trace": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "deployment.environment.name",
+              "value": {
+                "stringValue": "lab"
+              }
+            },
+            {
+              "key": "service.version",
+              "value": {
+                "stringValue": "0.1.0"
+              }
+            },
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "document-lab"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "document-lab.processing"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789454947050335500",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.read_body",
+                "parentSpanId": "9mXgUf9B0EQ=",
+                "spanId": "Ysg61zifd0o=",
+                "startTimeUnixNano": "1789454947050000000",
+                "status": {},
+                "traceId": "ps48pV45a5ie6dQ8r6Zn3A=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "document.processing.mode",
+                    "value": {
+                      "stringValue": "simulation"
+                    }
+                  },
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "client_disconnect"
+                    }
+                  },
+                  {
+                    "key": "error.type",
+                    "value": {
+                      "stringValue": "client_disconnect"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789454947074340833",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.process",
+                "parentSpanId": "9mXgUf9B0EQ=",
+                "spanId": "NF2TtTPc7DQ=",
+                "startTimeUnixNano": "1789454947051000000",
+                "status": {
+                  "code": "STATUS_CODE_ERROR"
+                },
+                "traceId": "ps48pV45a5ie6dQ8r6Zn3A=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789454947051023333",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.parse_json",
+                "parentSpanId": "9mXgUf9B0EQ=",
+                "spanId": "y5G9IwPgPeE=",
+                "startTimeUnixNano": "1789454947051000000",
+                "status": {},
+                "traceId": "ps48pV45a5ie6dQ8r6Zn3A=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789454947051009000",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.validate",
+                "parentSpanId": "9mXgUf9B0EQ=",
+                "spanId": "8wxOdh3V0do=",
+                "startTimeUnixNano": "1789454947051000000",
+                "status": {},
+                "traceId": "ps48pV45a5ie6dQ8r6Zn3A=="
+              }
+            ]
+          },
+          {
+            "scope": {
+              "name": "document-lab.http"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "error.type",
+                    "value": {
+                      "stringValue": "client_disconnect"
+                    }
+                  },
+                  {
+                    "key": "http.request.method",
+                    "value": {
+                      "stringValue": "POST"
+                    }
+                  },
+                  {
+                    "key": "http.route",
+                    "value": {
+                      "stringValue": "/api/documents/process"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789454947073662208",
+                "kind": "SPAN_KIND_SERVER",
+                "name": "POST /api/documents/process",
+                "parentSpanId": "zY/jt10jdjY=",
+                "spanId": "9mXgUf9B0EQ=",
+                "startTimeUnixNano": "1789454947050000000",
+                "status": {
+                  "code": "STATUS_CODE_ERROR"
+                },
+                "traceId": "ps48pV45a5ie6dQ8r6Zn3A=="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logs": [
+    {
+      "stream": {
+        "deployment_environment_name": "lab",
+        "service_name": "document-lab"
+      },
+      "values": [
+        {
+          "timestamp": "1789454947074000000",
+          "line": "HTTP request client_disconnect",
+          "structuredMetadata": {
+            "detected_level": "error",
+            "event_name": "http.request.completed",
+            "flags": "1",
+            "http_request_method": "POST",
+            "http_route": "/api/documents/process",
+            "observed_timestamp": "1789454947074000000",
+            "request_duration_ms": "24.653",
+            "request_id": "6cca579b-92f8-4e7c-b192-ffa5c79e4bc0",
+            "request_outcome": "client_disconnect",
+            "scope_name": "document-lab.http",
+            "service_version": "0.1.0",
+            "severity_number": "17",
+            "severity_text": "ERROR",
+            "span_id": "f665e051ff41d044",
+            "trace_id": "a6ce3ca55e396b989ee9d43cafa667dc"
+          }
+        }
+      ]
+    }
+  ]
+}
