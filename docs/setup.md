@@ -23,6 +23,7 @@ npm run lab:up
 | `npm run lab:doctor` | Vereisten en configuratie controleren |
 | `npm run lab:up` | Bouwen, starten, gezondheid en telemetrie controleren |
 | `npm run lab:check` | Gebruikersflow en trace/log-aflevering controleren |
+| `npm run lab:usage` | Cloud-gebruik vergelijken met de vastgelegde Free-budgetten |
 | `npm run lab:apply` | De twee dashboards en drie alertregels uit Git toepassen |
 | `npm run lab:stop` | Containers stoppen, configuratie behouden |
 

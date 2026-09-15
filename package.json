@@ -22,7 +22,8 @@
     "lab:up": "node scripts/lab.mjs up",
     "lab:check": "node scripts/lab.mjs check",
     "lab:apply": "node scripts/lab.mjs apply",
-    "lab:stop": "node scripts/lab.mjs stop"
+    "lab:stop": "node scripts/lab.mjs stop",
+    "lab:usage": "node scripts/check-usage.mjs"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",

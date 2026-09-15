@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-09-15",
+  "source": "https://grafana.com/pricing/",
+  "warningPercent": 80,
+  "items": [
+    { "name": "metrics", "metric": "grafanacloud_org_metrics_billable_series", "unit": "billable series", "freeLimit": 10000 },
+    { "name": "logs", "metric": "grafanacloud_org_logs_usage", "unit": "GB", "freeLimit": 50 },
+    { "name": "traces", "metric": "grafanacloud_org_traces_usage", "unit": "GB", "freeLimit": 50 },
+    { "name": "synthetic API checks", "metric": "grafanacloud_org_sm_billable_check_executions", "unit": "billable executions", "freeLimit": 100000 },
+    { "name": "Cloud k6", "metric": "grafanacloud_org_k6_virtual_user_hours_usage", "unit": "VUh", "freeLimit": 500 }
+  ]
+}

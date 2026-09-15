@@ -2,6 +2,11 @@ services:
   probe:
     image: grafana/synthetic-monitoring-agent@sha256:1822d709f06bab44f31f0373ea134e4e496ce84e13f2f9e7d6519d9e0c26bc51
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
     depends_on:
       app:
         condition: service_healthy

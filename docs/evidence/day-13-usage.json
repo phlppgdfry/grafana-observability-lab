@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-09-15T10:12:54.836Z",
+  "source": "https://grafana.com/pricing/",
+  "scope": "organization-wide billing usage; not a forecast or invoice",
+  "warningPercent": 80,
+  "items": [
+    {
+      "name": "metrics",
+      "metric": "grafanacloud_org_metrics_billable_series",
+      "unit": "billable series",
+      "freeLimit": 10000,
+      "value": 27,
+      "percent": 0.27,
+      "status": "within-budget"
+    },
+    {
+      "name": "logs",
+      "metric": "grafanacloud_org_logs_usage",
+      "unit": "GB",
+      "freeLimit": 50,
+      "value": 0.02626339886524195,
+      "percent": 0.0525267977304839,
+      "status": "within-budget"
+    },
+    {
+      "name": "traces",
+      "metric": "grafanacloud_org_traces_usage",
+      "unit": "GB",
+      "freeLimit": 50,
+      "value": 0.009104296565055847,
+      "percent": 0.018208593130111694,
+      "status": "within-budget"
+    },
+    {
+      "name": "synthetic API checks",
+      "metric": "grafanacloud_org_sm_billable_check_executions",
+      "unit": "billable executions",
+      "freeLimit": 100000,
+      "value": 4713.482727228844,
+      "percent": 4.713482727228844,
+      "status": "within-budget"
+    },
+    {
+      "name": "Cloud k6",
+      "metric": "grafanacloud_org_k6_virtual_user_hours_usage",
+      "unit": "VUh",
+      "freeLimit": 500,
+      "value": 0,
+      "percent": 0,
+      "status": "within-budget"
+    }
+  ],
+  "status": "pass"
+}

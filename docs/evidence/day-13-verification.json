@@ -1,0 +1,141 @@
+{
+  "action": "up",
+  "mode": "cloud",
+  "startedAt": "2026-09-15T10:13:49.873Z",
+  "checks": [
+    {
+      "name": "Node >=22",
+      "status": "pass"
+    },
+    {
+      "name": "dependencies installed",
+      "status": "pass"
+    },
+    {
+      "name": "Docker daemon",
+      "status": "pass"
+    },
+    {
+      "name": "local credential files",
+      "status": "pass"
+    },
+    {
+      "name": "Grafana context",
+      "status": "pass"
+    },
+    {
+      "name": "Compose configuration",
+      "status": "pass"
+    },
+    {
+      "name": "containers healthy",
+      "status": "pass"
+    },
+    {
+      "name": "12-step HTTP flow",
+      "status": "pass"
+    },
+    {
+      "name": "trace and log delivered to Grafana",
+      "status": "pass"
+    }
+  ],
+  "flow": {
+    "check": "document-user-flow",
+    "status": "pass",
+    "startedAt": "2026-09-15T10:14:31.125Z",
+    "finishedAt": "2026-09-15T10:14:31.500Z",
+    "steps": 12,
+    "results": [
+      {
+        "step": "health-before",
+        "status": 200,
+        "durationMs": 103,
+        "requestId": "2bc24572-5997-4f97-9562-1368a297b1dd"
+      },
+      {
+        "step": "valid-document",
+        "status": 200,
+        "durationMs": 76,
+        "requestId": "196ec742-e7e8-41f6-98a8-9cabd0596467",
+        "traceId": "c29a78dc211af0fea76d30899a3d3038"
+      },
+      {
+        "step": "invalid-json",
+        "status": 400,
+        "durationMs": 25,
+        "requestId": "cb0f453f-165c-4dcf-9fcb-68c41616a6d4",
+        "traceId": "4c6358f994a6a94a2411b1f944cc0fe8"
+      },
+      {
+        "step": "missing-name",
+        "status": 400,
+        "durationMs": 17,
+        "requestId": "6d3c94cc-7894-42f2-88e5-87dc39af06c2",
+        "traceId": "a17d3a76e81e94f1728a0e772aa57b60"
+      },
+      {
+        "step": "blank-name",
+        "status": 400,
+        "durationMs": 12,
+        "requestId": "f19b13c6-a8bd-4fa1-b724-546b3dd7ee84",
+        "traceId": "d2ad67c5fc1face0a1cd891ed93d1309"
+      },
+      {
+        "step": "wrong-name-type",
+        "status": 400,
+        "durationMs": 21,
+        "requestId": "2e372d92-57aa-4891-a573-89c303c08a39",
+        "traceId": "aeda377d03a37adab4d5a433bca85617"
+      },
+      {
+        "step": "name-too-long",
+        "status": 400,
+        "durationMs": 8,
+        "requestId": "0decc57d-4ded-4aac-aa68-190d3615b41f",
+        "traceId": "848f8194c104a01ec739c25bfcfdacd9"
+      },
+      {
+        "step": "payload-too-large",
+        "status": 413,
+        "durationMs": 20,
+        "requestId": "73aee887-ae3e-43ba-82eb-b2ad06b6b866",
+        "traceId": "413c27a240cece821a9a5e3699775786"
+      },
+      {
+        "step": "unknown-route",
+        "status": 404,
+        "durationMs": 8,
+        "requestId": "d2e37446-cf45-4bab-b44b-da65599d34fa",
+        "traceId": "ccec0607dcaee3a693d9770787a0e791"
+      },
+      {
+        "step": "wrong-method",
+        "status": 404,
+        "durationMs": 26,
+        "requestId": "f9eebffa-f060-4915-87b6-80c56630756f",
+        "traceId": "601bf7c811be4b4aa4c5e1aa8a83127f"
+      },
+      {
+        "step": "recovery-unicode",
+        "status": 200,
+        "durationMs": 51,
+        "requestId": "c31d16a4-1b87-44fc-affe-c573ec97c08f",
+        "traceId": "c920c5af1e4e95997a084f5a627f9e0c"
+      },
+      {
+        "step": "health-after",
+        "status": 200,
+        "durationMs": 4,
+        "requestId": "cf32a9ef-8e07-4f92-be4b-71cf2419d60a"
+      }
+    ]
+  },
+  "correlation": {
+    "traceId": "c29a78dc211af0fea76d30899a3d3038",
+    "spans": 5,
+    "matchingLog": true
+  },
+  "status": "pass",
+  "finishedAt": "2026-09-15T10:14:34.629Z"
+}

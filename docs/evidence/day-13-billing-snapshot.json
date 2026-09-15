@@ -1,0 +1,67 @@
+[
+  {
+    "metric": "grafanacloud_org_grafana_billable_users",
+    "queryTime": 1789466966.752,
+    "value": 0.8005284724261081
+  },
+  {
+    "metric": "grafanacloud_org_grafana_included_users",
+    "queryTime": 1789466966.752,
+    "value": 3
+  },
+  {
+    "metric": "grafanacloud_org_k6_virtual_user_hours_included_usage",
+    "queryTime": 1789466966.752,
+    "value": 500
+  },
+  {
+    "metric": "grafanacloud_org_k6_virtual_user_hours_usage",
+    "queryTime": 1789466966.752,
+    "value": 0
+  },
+  {
+    "metric": "grafanacloud_org_logs_included_usage",
+    "queryTime": 1789466966.752,
+    "value": 50
+  },
+  {
+    "metric": "grafanacloud_org_logs_usage",
+    "queryTime": 1789466966.752,
+    "value": 0.02626339886524195
+  },
+  {
+    "metric": "grafanacloud_org_metrics_billable_series",
+    "queryTime": 1789466966.752,
+    "value": 27
+  },
+  {
+    "metric": "grafanacloud_org_metrics_included_series",
+    "queryTime": 1789466966.752,
+    "value": 10000
+  },
+  {
+    "metric": "grafanacloud_org_sm_billable_check_executions",
+    "queryTime": 1789466966.752,
+    "value": 4713.482727228844
+  },
+  {
+    "metric": "grafanacloud_org_sm_included_check_executions",
+    "queryTime": 1789466966.752,
+    "value": 100000
+  },
+  {
+    "metric": "grafanacloud_org_total_overage",
+    "queryTime": 1789466966.752,
+    "value": 0
+  },
+  {
+    "metric": "grafanacloud_org_traces_included_usage",
+    "queryTime": 1789466966.752,
+    "value": 50
+  },
+  {
+    "metric": "grafanacloud_org_traces_usage",
+    "queryTime": 1789466966.752,
+    "value": 0.009104296565055847
+  }
+]

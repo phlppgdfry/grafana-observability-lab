@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-09-15T11:52:48.149Z",
+  "alerts": [
+    {
+      "uid": "document-lab-availability",
+      "state": "inactive",
+      "health": "ok"
+    },
+    {
+      "uid": "document-lab-latency",
+      "state": "inactive",
+      "health": "ok"
+    },
+    {
+      "uid": "document-lab-server-errors",
+      "state": "inactive",
+      "health": "ok"
+    }
+  ],
+  "checks": [
+    {
+      "name": "document-lab-health-12093",
+      "frequency": 60000,
+      "probes": [
+        "document-lab-local"
+      ],
+      "basicMetricsOnly": true
+    }
+  ],
+  "logging": {
+    "driver": "json-file",
+    "maxSize": "5m",
+    "maxFile": "2",
+    "services": [
+      "app",
+      "probe"
+    ]
+  }
+}
