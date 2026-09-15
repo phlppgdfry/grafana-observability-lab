@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-09-15T09:21:25.897Z",
+  "dashboards": [
+    {
+      "uid": "document-lab-day-1",
+      "title": "Document Lab · Bereikbaarheid"
+    },
+    {
+      "uid": "document-lab-day-3",
+      "title": "Document Lab · API-overzicht"
+    }
+  ],
+  "rules": [
+    {
+      "uid": "document-lab-availability",
+      "health": "ok",
+      "state": "inactive"
+    },
+    {
+      "uid": "document-lab-latency",
+      "health": "ok",
+      "state": "inactive"
+    },
+    {
+      "uid": "document-lab-server-errors",
+      "health": "ok",
+      "state": "inactive"
+    }
+  ]
+}

@@ -17,7 +17,12 @@
     "perf:baseline": "mkdir -p test-results && k6 run --no-usage-report tests/baseline.k6.js",
     "perf:ladder": "node scripts/load-ladder.mjs",
     "experiment:faults": "node scripts/fault-exercise.mjs",
-    "perf:cancellation": "node scripts/compare-cancellation.mjs"
+    "perf:cancellation": "node scripts/compare-cancellation.mjs",
+    "lab:doctor": "node scripts/lab.mjs doctor",
+    "lab:up": "node scripts/lab.mjs up",
+    "lab:check": "node scripts/lab.mjs check",
+    "lab:apply": "node scripts/lab.mjs apply",
+    "lab:stop": "node scripts/lab.mjs stop"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",

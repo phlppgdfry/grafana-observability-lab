@@ -61,6 +61,10 @@ Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaa
 
 De API annuleert verwerking wanneer de client voortijdig de verbinding verbreekt. `npm run perf:cancellation` vergelijkt de oude en nieuwe code: verlaten werk stopt eerder, terwijl normale verwerking ongeveer even snel blijft. Zie [voor/na-meting en grenzen](docs/day-11.md).
 
+## Dag 12
+
+`npm run lab:up` controleert de vereisten, start de volledige Docker-setup en verifieert de gebruikersflow plus echte trace/log-aflevering. `lab:apply` past de twee dashboards en drie alertregels uit Git toe. GitHub Actions controleert ook tweemaal starten vanaf een schone checkout zonder Cloud-credentials. Zie [setup en foutafhandeling](docs/setup.md) en [dag 12](docs/day-12.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

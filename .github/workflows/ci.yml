@@ -36,3 +36,26 @@ jobs:
           name: user-flow-report
           path: test-results/user-flow.json
           if-no-files-found: ignore
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - name: Start from clean checkout without Cloud credentials
+        run: npm run lab:up -- --local
+      - name: Repeat setup and verify again
+        run: npm run lab:up -- --local
+      - name: Stop local lab
+        if: always()
+        run: npm run lab:stop -- --local
+      - name: Preserve setup reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compose-setup-reports
+          path: test-results/lab-*.json
+          if-no-files-found: error
