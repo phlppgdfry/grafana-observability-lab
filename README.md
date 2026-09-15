@@ -2,6 +2,10 @@
 
 Een zelfstandig lab om tijdens een 14-daagse trial een documentverwerkings-API zichtbaar, meetbaar en testbaar te maken met Grafana Cloud.
 
+**De 14 werkstappen zijn afgerond.** Bekijk het [eindresultaat met screenshots](docs/day-14.md), de [demonstratie van tien minuten](docs/walkthrough.md) en de [architectuur](docs/architecture.md). Opnieuw starten: `npm ci` gevolgd door `npm run lab:up`; zie [vereisten en beheer](docs/setup.md).
+
+![Grafana API-overzicht van de einddemonstratie](docs/assets/day-14/document-lab-day-3.png)
+
 **Trial-einde: 21 september 2026.** Daarna schakelt de account automatisch naar Free. We ronden de evaluatie uiterlijk 20 september af.
 
 ## Dag 1
@@ -68,6 +72,10 @@ De API annuleert verwerking wanneer de client voortijdig de verbinding verbreekt
 ## Dag 13
 
 `npm run lab:usage` vergelijkt het werkelijke Cloud-gebruik met de Free-budgetten en signaleert 80% gebruik of ontbrekende gegevens. Traces en requestlogs blijven volledig voor de bestaande dashboards en meldingen; lokale Docker-logs zijn begrensd. Zie [gebruik, instellingen en grenzen](docs/day-13.md).
+
+## Dag 14
+
+Het eindverslag bundelt actuele, gecontroleerde screenshots, de architectuur, een demonstratiehandleiding en verwijzingen naar het meetbewijs. Zie [dag 14](docs/day-14.md).
 
 ## Starten
 

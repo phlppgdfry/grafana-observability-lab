@@ -15,6 +15,6 @@
 | 11 | Onnodige verwerking stoppen — voltooid | [Annulering: 29,73 → 1,04 ms resterende verwerking na verbreken verbinding](day-11.md) |
 | 12 | Configuratie reproduceerbaar toepassen — voltooid | [Vaste lab-commando's, herhaalde Cloud-start/toepassing en schone Docker-setup in CI](day-12.md) |
 | 13 | Verbruik en instellingen voor Free — voltooid | [Werkelijk gebruik gecontroleerd, budgetcheck toegevoegd en Docker-logs begrensd](day-13.md) |
-| 14 | Walkthrough, screenshots en architectuur | Toonbaar project |
+| 14 | Walkthrough, screenshots en architectuur — voltooid | [Eindresultaat, demonstratie en visueel gecontroleerde dashboards](day-14.md) |
 
 De trial eindigt op **21 september 2026**, bevestigd via de accountmelding door de gebruiker. Rond de evaluatie en afstemming op Free uiterlijk 20 september af. Geen automatische dagelijkse uitvoering ingepland.

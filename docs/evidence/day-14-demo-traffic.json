@@ -1,0 +1,170 @@
+{
+  "startedAt": "2026-09-15T18:17:42.413Z",
+  "finishedAt": "2026-09-15T18:18:04.448Z",
+  "total": 40,
+  "successful": 32,
+  "rejected": 8,
+  "rejectedPercent": 20,
+  "requests": [
+    {
+      "status": 200,
+      "traceId": "344e83a505f92598c80dd5f352ea713e"
+    },
+    {
+      "status": 200,
+      "traceId": "cd131c4e44f8572dd36c00b553802f88"
+    },
+    {
+      "status": 200,
+      "traceId": "1197043640c119f69c07d19a01411dbb"
+    },
+    {
+      "status": 200,
+      "traceId": "ab9e2a615eddbbb15a90b55fabb5055f"
+    },
+    {
+      "status": 400,
+      "traceId": "c45c6b392440b66c3e002dbc702a66d4"
+    },
+    {
+      "status": 200,
+      "traceId": "0babd8f531efee5a37296a1a303d3a6d"
+    },
+    {
+      "status": 200,
+      "traceId": "66576fca94075d6624ee89adc5afe4ea"
+    },
+    {
+      "status": 200,
+      "traceId": "833548d0c9aea4ff104f6cb53c2861cb"
+    },
+    {
+      "status": 200,
+      "traceId": "6dc5b08d0da7d3e6382094b029c1a038"
+    },
+    {
+      "status": 400,
+      "traceId": "1af446332c12bc499e0421511baa3353"
+    },
+    {
+      "status": 200,
+      "traceId": "b36f0aa9b4abe4fd4f94ea90876298f8"
+    },
+    {
+      "status": 200,
+      "traceId": "a0a8eb21fb5457929d08358da389918b"
+    },
+    {
+      "status": 200,
+      "traceId": "db0827ebe63fbca3e9d8a5a9a865d54f"
+    },
+    {
+      "status": 200,
+      "traceId": "5ce97507a34fe50cd179085df2f03101"
+    },
+    {
+      "status": 400,
+      "traceId": "37216dcb3a34dd7105481a10bffbaf01"
+    },
+    {
+      "status": 200,
+      "traceId": "11daa65dfe5c912a6f7dfd0163bf3be5"
+    },
+    {
+      "status": 200,
+      "traceId": "e57616edd03e27b7860497668c6b85b4"
+    },
+    {
+      "status": 200,
+      "traceId": "1680771389fa8493dae87a5a5d63b339"
+    },
+    {
+      "status": 200,
+      "traceId": "459aadfb858b842179436172409e4d78"
+    },
+    {
+      "status": 400,
+      "traceId": "7f3b5414ef64207b7f2e59deef8938ff"
+    },
+    {
+      "status": 200,
+      "traceId": "d4b3250847ca32e504e5fd2f18d0f6b7"
+    },
+    {
+      "status": 200,
+      "traceId": "91b444a6d2cf94ce378374e9a131ca88"
+    },
+    {
+      "status": 200,
+      "traceId": "ad794beed04f1a6bd7453b54cfaf8d91"
+    },
+    {
+      "status": 200,
+      "traceId": "8debaacbfc55e795b6f7398eebc1e542"
+    },
+    {
+      "status": 400,
+      "traceId": "c7a147fd3ab58d10818472f992902053"
+    },
+    {
+      "status": 200,
+      "traceId": "0cfa17a95d88616968963e73d5e0bbc1"
+    },
+    {
+      "status": 200,
+      "traceId": "a0470b57e533cd18e2d21b4fbd5fdf75"
+    },
+    {
+      "status": 200,
+      "traceId": "40367476e135b2f3f1caa4a12782de6e"
+    },
+    {
+      "status": 200,
+      "traceId": "0e3f65fffcb2a1a7c31fec63c8ae1bee"
+    },
+    {
+      "status": 400,
+      "traceId": "bb1551a9d7bcfbd371d50e3af00f74ac"
+    },
+    {
+      "status": 200,
+      "traceId": "2903268f972962c839a4150f984afa6d"
+    },
+    {
+      "status": 200,
+      "traceId": "0635641c5e638a40140fce981f47d2aa"
+    },
+    {
+      "status": 200,
+      "traceId": "e23285e5be6f3c1592b7cb9dde0cc1e5"
+    },
+    {
+      "status": 200,
+      "traceId": "e3ca996bc5f4982f9c4e37740eb6b8ae"
+    },
+    {
+      "status": 400,
+      "traceId": "e32e0bf339e962f6c136083769048923"
+    },
+    {
+      "status": 200,
+      "traceId": "a83b1b4303f6e6ca562cf1fb2d9786f0"
+    },
+    {
+      "status": 200,
+      "traceId": "58d335b7e9364d3e7de45398be30a455"
+    },
+    {
+      "status": 200,
+      "traceId": "51dba96c98056f5db91a18e1ad510318"
+    },
+    {
+      "status": 200,
+      "traceId": "012bce39e9e0c96f139c7bf66b6da322"
+    },
+    {
+      "status": 400,
+      "traceId": "615eaf8cbeb4ec7b9128cc9d7eac5ea2"
+    }
+  ]
+}
