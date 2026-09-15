@@ -1,0 +1,187 @@
+{
+  "phase": "slow",
+  "traceId": "46b81333796fd04e95455d355e546284",
+  "trace": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "deployment.environment.name",
+              "value": {
+                "stringValue": "lab"
+              }
+            },
+            {
+              "key": "service.version",
+              "value": {
+                "stringValue": "0.1.0"
+              }
+            },
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "document-lab"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "document-lab.http"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "http.request.method",
+                    "value": {
+                      "stringValue": "POST"
+                    }
+                  },
+                  {
+                    "key": "http.response.status_code",
+                    "value": {
+                      "intValue": "200"
+                    }
+                  },
+                  {
+                    "key": "http.route",
+                    "value": {
+                      "stringValue": "/api/documents/process"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434556019215333",
+                "kind": "SPAN_KIND_SERVER",
+                "name": "POST /api/documents/process",
+                "spanId": "CbqAYvXdklM=",
+                "startTimeUnixNano": "1789434555608000000",
+                "status": {},
+                "traceId": "RrgTM3lv0E6VRV01XlRihA=="
+              }
+            ]
+          },
+          {
+            "scope": {
+              "name": "document-lab.processing"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434555610111750",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.read_body",
+                "parentSpanId": "CbqAYvXdklM=",
+                "spanId": "xKaT+webGb4=",
+                "startTimeUnixNano": "1789434555608000000",
+                "status": {},
+                "traceId": "RrgTM3lv0E6VRV01XlRihA=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434555612127833",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.parse_json",
+                "parentSpanId": "CbqAYvXdklM=",
+                "spanId": "/DFochbhKcw=",
+                "startTimeUnixNano": "1789434555612000000",
+                "status": {},
+                "traceId": "RrgTM3lv0E6VRV01XlRihA=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434555613027833",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.validate",
+                "parentSpanId": "CbqAYvXdklM=",
+                "spanId": "WahdDc5CsYk=",
+                "startTimeUnixNano": "1789434555613000000",
+                "status": {},
+                "traceId": "RrgTM3lv0E6VRV01XlRihA=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "document.processing.mode",
+                    "value": {
+                      "stringValue": "simulation"
+                    }
+                  },
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434556003940375",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.process",
+                "parentSpanId": "CbqAYvXdklM=",
+                "spanId": "mLy4tB/CanA=",
+                "startTimeUnixNano": "1789434555613000000",
+                "status": {},
+                "traceId": "RrgTM3lv0E6VRV01XlRihA=="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logs": [
+    {
+      "stream": {
+        "deployment_environment_name": "lab",
+        "service_name": "document-lab"
+      },
+      "values": [
+        {
+          "timestamp": "1789434556019000000",
+          "line": "HTTP request completed",
+          "structuredMetadata": {
+            "detected_level": "info",
+            "event_name": "http.request.completed",
+            "flags": "1",
+            "http_request_method": "POST",
+            "http_response_status_code": "200",
+            "http_route": "/api/documents/process",
+            "observed_timestamp": "1789434556019000000",
+            "request_duration_ms": "407.277",
+            "request_id": "e1fda113-72d1-4aa0-a700-6d44e89ab0ee",
+            "request_outcome": "completed",
+            "scope_name": "document-lab.http",
+            "service_version": "0.1.0",
+            "severity_number": "9",
+            "severity_text": "INFO",
+            "span_id": "09ba8062f5dd9253",
+            "trace_id": "46b81333796fd04e95455d355e546284"
+          }
+        }
+      ]
+    }
+  ]
+}

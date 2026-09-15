@@ -43,6 +43,8 @@ Deze Grafana-resource ondersteunt geen server-side dry-run. `validate` controlee
 
 ## Begrensde foutscenario's
 
+Voor de volledige dag-10-oefening met automatische statusgeschiedenis, diagnose en herstelcontrole: `npm run experiment:faults`. Zie [het experimentrunbook](../experiments/README.md). De normale API blijft daarbij beschikbaar; alleen een tijdelijke API produceert de foutaanvragen.
+
 `tests/alert-scenarios.mjs` start een aparte API op een vrije lokale poort, maakt 12 trage succesvolle aanvragen en 3 gecontroleerde HTTP 500-aanvragen, sluit de API af en flusht de telemetrie. Het vereist expliciet `RUN_LIVE_ALERT_TEST=true`, plus de bestaande OTLP-omgeving en lokale tokenfile. De fouten staan niet als publieke testendpoint in de normale API.
 
 Deze test schrijft echte lablogs en traces en kan waarschuwingen versturen zodra een ontvanger is aangesloten. Gebruik hem dus bewust. Een uitvaltest vereist afzonderlijk kort stoppen en altijd weer starten van alleen de app-container; de probe moet blijven draaien.

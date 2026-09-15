@@ -1,0 +1,385 @@
+{
+  "startedAt": "2026-09-15T01:09:11.490Z",
+  "history": [
+    {
+      "at": "2026-09-15T01:09:14.014Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "inactive",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "inactive",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:09:56.379Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "pending",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "inactive",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:10:28.343Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "pending",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "pending",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:11:00.088Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "pending",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "pending",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:11:32.070Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "pending",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "pending",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:12:04.363Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "pending",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "pending",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:12:36.018Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "pending",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "firing",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:13:07.542Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "firing",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "firing",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:13:39.634Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "firing",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "firing",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:14:11.892Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "firing",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "firing",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:14:43.371Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "firing",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "firing",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:15:15.252Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "inactive",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "firing",
+          "health": "ok"
+        }
+      ]
+    },
+    {
+      "at": "2026-09-15T01:15:47.260Z",
+      "rules": [
+        {
+          "uid": "document-lab-latency",
+          "state": "inactive",
+          "health": "ok"
+        },
+        {
+          "uid": "document-lab-server-errors",
+          "state": "inactive",
+          "health": "ok"
+        }
+      ]
+    }
+  ],
+  "before": {
+    "check": "document-user-flow",
+    "status": "pass",
+    "startedAt": "2026-09-15T01:09:11.492Z",
+    "finishedAt": "2026-09-15T01:09:11.993Z",
+    "steps": 12,
+    "results": [
+      {
+        "step": "health-before",
+        "status": 200,
+        "durationMs": 176,
+        "requestId": "aaef18e9-7a7e-4089-8e49-cdfeced73ba0"
+      },
+      {
+        "step": "valid-document",
+        "status": 200,
+        "durationMs": 100,
+        "requestId": "5cf5c1d3-659e-4a90-a4e6-f52ccf560b0b",
+        "traceId": "24836c1b5bc721dfb72b279084a640d0"
+      },
+      {
+        "step": "invalid-json",
+        "status": 400,
+        "durationMs": 28,
+        "requestId": "2ce110b5-8e3d-4e04-805b-96cce91c8d70",
+        "traceId": "1fe02f7377b6beacf7b24d3f2f19d35e"
+      },
+      {
+        "step": "missing-name",
+        "status": 400,
+        "durationMs": 44,
+        "requestId": "fb86e89e-b163-41ea-a8ba-641a3bc07448",
+        "traceId": "5e9071d34a481db377bea2c639c9b808"
+      },
+      {
+        "step": "blank-name",
+        "status": 400,
+        "durationMs": 15,
+        "requestId": "4d68f5de-6e59-45fc-a86f-c5138be4311e",
+        "traceId": "a1338fbffda088b1d35ea51f01e1465e"
+      },
+      {
+        "step": "wrong-name-type",
+        "status": 400,
+        "durationMs": 14,
+        "requestId": "242c3ef7-c80b-4f2a-8c7e-bf5038ac17a6",
+        "traceId": "d3cefa8cf4a161d3e3d4af89a3fac369"
+      },
+      {
+        "step": "name-too-long",
+        "status": 400,
+        "durationMs": 11,
+        "requestId": "e021ebbc-03de-4803-bdf6-03ab20e129a4",
+        "traceId": "2b64c1d5244e21750f51b600aa2e2d02"
+      },
+      {
+        "step": "payload-too-large",
+        "status": 413,
+        "durationMs": 17,
+        "requestId": "48e10990-828a-4ab0-8d93-0976f2464d89",
+        "traceId": "708c0350c71f8cbbdd64d2d5143ce61c"
+      },
+      {
+        "step": "unknown-route",
+        "status": 404,
+        "durationMs": 5,
+        "requestId": "c8a3f0b8-29c0-46bf-954e-b29b13b83939",
+        "traceId": "2bf5ec42437ab70b48b4064000cc5a16"
+      },
+      {
+        "step": "wrong-method",
+        "status": 404,
+        "durationMs": 35,
+        "requestId": "c22da3bc-7837-492c-8296-064c67073ee0",
+        "traceId": "bf2fac9d838f794bc278b1fd7820cc73"
+      },
+      {
+        "step": "recovery-unicode",
+        "status": 200,
+        "durationMs": 50,
+        "requestId": "62667564-cbef-424e-9996-ba77eb800014",
+        "traceId": "e355bc21750efbd90d52e736d7bedd5f"
+      },
+      {
+        "step": "health-after",
+        "status": 200,
+        "durationMs": 3,
+        "requestId": "7e7c16d4-ebe5-490c-83ca-1a276c55607f"
+      }
+    ]
+  },
+  "detectionAndRecovery": "pass",
+  "status": "pass",
+  "after": {
+    "check": "document-user-flow",
+    "status": "pass",
+    "startedAt": "2026-09-15T01:16:00.808Z",
+    "finishedAt": "2026-09-15T01:16:00.989Z",
+    "steps": 12,
+    "results": [
+      {
+        "step": "health-before",
+        "status": 200,
+        "durationMs": 16,
+        "requestId": "5872f5eb-a3f6-4ef8-b4df-b52ae1b19859"
+      },
+      {
+        "step": "valid-document",
+        "status": 200,
+        "durationMs": 57,
+        "requestId": "eb84b9ad-7bea-4bf3-abb3-607a1ff70358",
+        "traceId": "c23f1447a603066f8bd9e1df8b609d4d"
+      },
+      {
+        "step": "invalid-json",
+        "status": 400,
+        "durationMs": 16,
+        "requestId": "79e9184f-a4e5-4eea-a562-0f5e1b294973",
+        "traceId": "ec3f84c701320c1399bf6ee9aa34d865"
+      },
+      {
+        "step": "missing-name",
+        "status": 400,
+        "durationMs": 6,
+        "requestId": "dced7b1b-2c35-40ab-ade4-8ad4ddb69cd9",
+        "traceId": "668a005626ac3d8c0f888e9f393d8220"
+      },
+      {
+        "step": "blank-name",
+        "status": 400,
+        "durationMs": 8,
+        "requestId": "08663a16-d81b-4d8c-b290-03593c4dfa3d",
+        "traceId": "417829bf4264d1e22b50c6508341b5d4"
+      },
+      {
+        "step": "wrong-name-type",
+        "status": 400,
+        "durationMs": 4,
+        "requestId": "6632685f-a184-436c-9b6f-38132945419e",
+        "traceId": "e8be32e7e7388d0d29a9124cca09c609"
+      },
+      {
+        "step": "name-too-long",
+        "status": 400,
+        "durationMs": 6,
+        "requestId": "288771b2-e448-4463-ab8e-060ef05dc56e",
+        "traceId": "8eb27aab779bb421cec0786f6dd729a9"
+      },
+      {
+        "step": "payload-too-large",
+        "status": 413,
+        "durationMs": 7,
+        "requestId": "7a0b8699-1555-484d-aec7-6f2b2bc2cd97",
+        "traceId": "5b8e4d39eba339b7c38d2ce7f7a0b3bf"
+      },
+      {
+        "step": "unknown-route",
+        "status": 404,
+        "durationMs": 5,
+        "requestId": "ffde4299-db96-4117-ad21-3105633916c5",
+        "traceId": "eefb27f6572a47b0a4daf83a5215f543"
+      },
+      {
+        "step": "wrong-method",
+        "status": 404,
+        "durationMs": 4,
+        "requestId": "e7ec38b9-e1bc-4981-8fb6-8bd0aa2b8694",
+        "traceId": "7a78f0c5d71de70582ef505fa33b05ed"
+      },
+      {
+        "step": "recovery-unicode",
+        "status": 200,
+        "durationMs": 46,
+        "requestId": "98d78062-2899-4f41-bb25-429c309c0d37",
+        "traceId": "a49f316ae441f240492eaa13266ad716"
+      },
+      {
+        "step": "health-after",
+        "status": 200,
+        "durationMs": 5,
+        "requestId": "e29078ea-a580-405f-97b8-e7e75d358304"
+      }
+    ]
+  },
+  "finishedAt": "2026-09-15T01:16:00.989Z"
+}

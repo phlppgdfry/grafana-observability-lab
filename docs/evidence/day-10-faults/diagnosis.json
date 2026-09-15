@@ -1,0 +1,41 @@
+{
+  "verifiedAt": "2026-09-15T01:16:20.092Z",
+  "diagnosis": [
+    {
+      "phase": "slow",
+      "traceId": "46b81333796fd04e95455d355e546284",
+      "status": 200,
+      "spans": 5,
+      "rootDurationMs": 411.215333,
+      "processingDurationMs": 390.940375,
+      "severity": "INFO"
+    },
+    {
+      "phase": "error",
+      "traceId": "ff067ac86eedcb14b83f94b34a202a01",
+      "status": 500,
+      "spans": 5,
+      "rootDurationMs": 4.256625,
+      "processingDurationMs": 2.494875,
+      "severity": "ERROR"
+    },
+    {
+      "phase": "invalid-input",
+      "traceId": "2ebe94c8230e3403d64bb7bc8863430d",
+      "status": 400,
+      "spans": 4,
+      "rootDurationMs": 12.015209,
+      "processingDurationMs": null,
+      "severity": "WARN"
+    },
+    {
+      "phase": "recovered",
+      "traceId": "c9ffa344fb4395889156b5bf09323f65",
+      "status": 200,
+      "spans": 5,
+      "rootDurationMs": 43.951875,
+      "processingDurationMs": 41.569792,
+      "severity": "INFO"
+    }
+  ]
+}

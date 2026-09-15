@@ -53,6 +53,10 @@ Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaa
 
 `npm run perf:ladder` verhoogt het aanbod stapsgewijs van 5 naar maximaal 1.000 aanvragen/s. Elke stap heeft eigen criteria; bij een mislukte stap stopt de verhoging en volgt een volledige herstelmeting. Zie [werkwijze en resultaten](docs/day-09.md).
 
+## Dag 10
+
+`npm run experiment:faults` oefent vertraging, interne fouten en herstel op een tijdelijke lokale API. De runner volgt de bestaande Grafana-regels en controleert de oorzaak via gekoppelde logs en traces. Dit kan echte labwaarschuwingen sturen. Zie [uitvoering en diagnose](docs/day-10.md) en [het experimentrunbook](experiments/README.md).
+
 ## Starten
 
 Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).

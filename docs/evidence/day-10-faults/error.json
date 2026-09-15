@@ -1,0 +1,203 @@
+{
+  "phase": "error",
+  "traceId": "ff067ac86eedcb14b83f94b34a202a01",
+  "trace": {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "deployment.environment.name",
+              "value": {
+                "stringValue": "lab"
+              }
+            },
+            {
+              "key": "service.version",
+              "value": {
+                "stringValue": "0.1.0"
+              }
+            },
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "document-lab"
+              }
+            }
+          ]
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "document-lab.processing"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "document.processing.mode",
+                    "value": {
+                      "stringValue": "simulation"
+                    }
+                  },
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "internal_error"
+                    }
+                  },
+                  {
+                    "key": "error.type",
+                    "value": {
+                      "stringValue": "internal_error"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434560556494875",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.process",
+                "parentSpanId": "ZzaZmwGiLkE=",
+                "spanId": "TII9+SiE6nA=",
+                "startTimeUnixNano": "1789434560554000000",
+                "status": {
+                  "code": "STATUS_CODE_ERROR"
+                },
+                "traceId": "/wZ6yG7tyxS4P5SzSiAqAQ=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434560554030333",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.parse_json",
+                "parentSpanId": "ZzaZmwGiLkE=",
+                "spanId": "V6/LsIC0prM=",
+                "startTimeUnixNano": "1789434560554000000",
+                "status": {},
+                "traceId": "/wZ6yG7tyxS4P5SzSiAqAQ=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434560554010583",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.validate",
+                "parentSpanId": "ZzaZmwGiLkE=",
+                "spanId": "ms4dHOvpuBU=",
+                "startTimeUnixNano": "1789434560554000000",
+                "status": {},
+                "traceId": "/wZ6yG7tyxS4P5SzSiAqAQ=="
+              },
+              {
+                "attributes": [
+                  {
+                    "key": "operation.outcome",
+                    "value": {
+                      "stringValue": "completed"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434560554258167",
+                "kind": "SPAN_KIND_INTERNAL",
+                "name": "document.read_body",
+                "parentSpanId": "ZzaZmwGiLkE=",
+                "spanId": "/TSj6cxs4dU=",
+                "startTimeUnixNano": "1789434560554000000",
+                "status": {},
+                "traceId": "/wZ6yG7tyxS4P5SzSiAqAQ=="
+              }
+            ]
+          },
+          {
+            "scope": {
+              "name": "document-lab.http"
+            },
+            "spans": [
+              {
+                "attributes": [
+                  {
+                    "key": "error.type",
+                    "value": {
+                      "stringValue": "internal_error"
+                    }
+                  },
+                  {
+                    "key": "http.request.method",
+                    "value": {
+                      "stringValue": "POST"
+                    }
+                  },
+                  {
+                    "key": "http.response.status_code",
+                    "value": {
+                      "intValue": "500"
+                    }
+                  },
+                  {
+                    "key": "http.route",
+                    "value": {
+                      "stringValue": "/api/documents/process"
+                    }
+                  }
+                ],
+                "endTimeUnixNano": "1789434560558256625",
+                "kind": "SPAN_KIND_SERVER",
+                "name": "POST /api/documents/process",
+                "spanId": "ZzaZmwGiLkE=",
+                "startTimeUnixNano": "1789434560554000000",
+                "status": {
+                  "code": "STATUS_CODE_ERROR"
+                },
+                "traceId": "/wZ6yG7tyxS4P5SzSiAqAQ=="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logs": [
+    {
+      "stream": {
+        "deployment_environment_name": "lab",
+        "service_name": "document-lab"
+      },
+      "values": [
+        {
+          "timestamp": "1789434560558000000",
+          "line": "HTTP request internal_error",
+          "structuredMetadata": {
+            "detected_level": "error",
+            "event_name": "http.request.completed",
+            "flags": "1",
+            "http_request_method": "POST",
+            "http_response_status_code": "500",
+            "http_route": "/api/documents/process",
+            "observed_timestamp": "1789434560558000000",
+            "request_duration_ms": "4.064",
+            "request_id": "4b0d74f7-7c8e-4c31-a86c-42977398dc4e",
+            "request_outcome": "internal_error",
+            "scope_name": "document-lab.http",
+            "service_version": "0.1.0",
+            "severity_number": "17",
+            "severity_text": "ERROR",
+            "span_id": "6736999b01a22e41",
+            "trace_id": "ff067ac86eedcb14b83f94b34a202a01"
+          }
+        }
+      ]
+    }
+  ]
+}

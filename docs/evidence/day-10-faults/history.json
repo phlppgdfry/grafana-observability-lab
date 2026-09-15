@@ -1,0 +1,197 @@
+[
+  {
+    "at": "2026-09-15T01:09:14.014Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "inactive",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "inactive",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:09:56.379Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "pending",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "inactive",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:10:28.343Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "pending",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "pending",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:11:00.088Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "pending",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "pending",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:11:32.070Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "pending",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "pending",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:12:04.363Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "pending",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "pending",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:12:36.018Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "pending",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "firing",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:13:07.542Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "firing",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "firing",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:13:39.634Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "firing",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "firing",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:14:11.892Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "firing",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "firing",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:14:43.371Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "firing",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "firing",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:15:15.252Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "inactive",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "firing",
+        "health": "ok"
+      }
+    ]
+  },
+  {
+    "at": "2026-09-15T01:15:47.260Z",
+    "rules": [
+      {
+        "uid": "document-lab-latency",
+        "state": "inactive",
+        "health": "ok"
+      },
+      {
+        "uid": "document-lab-server-errors",
+        "state": "inactive",
+        "health": "ok"
+      }
+    ]
+  }
+]
