@@ -6,6 +6,15 @@ Node.js >=22, Git en Docker met Compose. `npm ci` installeert de exacte dependen
 
 Voor Grafana: bestaande `gcx`-login met context `lab`, `.local/cloud-token` en `.local/probe.env` met `SM_AGENT_API_TOKEN`. Deze bestanden staan buiten Git. Neem ze op een nieuwe computer over via een veilige eigen overdracht; commit ze nooit. De huidige Compose-overlay is bewust gekoppeld aan de bestaande labstack, niet aan een automatisch aangemaakte nieuwe account.
 
+Alleen voor een gebruiker met toegang tot de bestaande stack, de CLI-login instellen of herstellen:
+
+```sh
+gcx login lab --server https://bronzemillipede944.grafana.net --oauth --yes
+gcx config check --context lab
+```
+
+Een reviewer zonder Grafana-toegang kan de lokale modus hieronder gebruiken en de opgeslagen screenshots en meetrapporten bekijken.
+
 ```sh
 npm ci
 npm run lab:doctor
@@ -54,7 +63,7 @@ Lokale modus gebruikt alleen `docker-compose.yml`, zonder probe of Cloud-credent
 
 - Docker daemon: start/hervat Docker Desktop en herhaal doctor.
 - Credentialbestanden: herstel de lokale bestanden; de inhoud wordt bewust niet getoond.
-- Grafana-context: controleer `gcx config check --context lab`; log zo nodig opnieuw in volgens de README.
+- Grafana-context: controleer `gcx config check --context lab`; log zo nodig opnieuw in met de opdracht hierboven.
 - Containers: inspecteer `docker compose ps` en de app-logs; controleer of poort 4310 vrij is.
 - HTTP-flow: gebruik `npm run check:flow` voor de mislukte stap.
 - Telemetrie: controleer [OTLP-configuratie](../telemetry/README.md), exporterfouten en de Grafana-instance. De controle probeert acht keer met korte pauzes; blijvende uitval blijft een fout.

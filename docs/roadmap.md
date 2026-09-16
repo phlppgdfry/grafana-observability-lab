@@ -1,5 +1,7 @@
 # 14-daagse roadmap
 
+Alle veertien werkstappen zijn afgerond. Dit overzicht bewaart het leer- en ontwikkeltraject. Begin voor een korte beoordeling bij de [projectsamenvatting](project-summary.nl.md); actuele beheeracties staan in [projectstatus](status.md).
+
 | Dag | Werk | Bewijs |
 | --- | --- | --- |
 | 1 | Eigen repo, demo, CLI-login, trial controleren, healthcheck | Repo + geslaagde check + verbindingsstatus |

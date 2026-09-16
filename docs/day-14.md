@@ -8,6 +8,8 @@ Een lokale Node.js-API met echte HTTP-aanvragen, OpenTelemetry-traces, gestructu
 
 Begin bij de [demonstratie van tien minuten](walkthrough.md) en het [architectuuroverzicht](architecture.md). Gebruik [setup](setup.md) om het lab opnieuw te starten. De afzonderlijke [dagverslagen](roadmap.md) bevatten het historische meetbewijs.
 
+Voor een korte beoordeling of sollicitatie: lees de [projectsamenvatting](project-summary.nl.md). Actuele beheeracties en mogelijke uitbreidingen staan apart in [projectstatus](status.md); dit verslag bewaart de afronding en metingen van 15 september.
+
 ## Actuele screenshots
 
 Beide screenshots zijn op 15 september 2026 rond 18:19 UTC vanuit de bestaande Grafana-dashboards gerenderd, op 1600 pixels breed, met het afgelopen halfuur als tijdvenster. Ze zijn visueel gecontroleerd: de panels tonen data, de teksten zijn leesbaar en er staan geen datasourcefouten in beeld.

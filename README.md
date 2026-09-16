@@ -1,136 +1,120 @@
 # Grafana Observability Lab
 
-Een zelfstandig lab om tijdens een 14-daagse trial een documentverwerkings-API zichtbaar, meetbaar en testbaar te maken met Grafana Cloud.
+**From an API request to a diagnosed incident — with evidence at every step.**
 
-**De 14 werkstappen zijn afgerond.** Bekijk het [eindresultaat met screenshots](docs/day-14.md), de [demonstratie van tien minuten](docs/walkthrough.md) en de [architectuur](docs/architecture.md). Opnieuw starten: `npm ci` gevolgd door `npm run lab:up`; zie [vereisten en beheer](docs/setup.md).
+An AI-assisted portfolio project by **Philippe Godfroy**, combining a Node.js API, OpenTelemetry, Grafana Cloud, Docker and k6. The project explores how to detect failures, locate their cause, verify recovery and measure a targeted improvement.
 
-![Grafana API-overzicht van de einddemonstratie](docs/assets/day-14/document-lab-day-3.png)
+[Project summary · Nederlands](docs/project-summary.nl.md) · [Architecture](docs/architecture.md) · [10-minute demo](docs/walkthrough.md) · [CI results](https://github.com/phlppgdfry/grafana-observability-lab/actions/workflows/ci.yml)
 
-**Trial-einde: 21 september 2026.** Daarna schakelt de account automatisch naar Free. We ronden de evaluatie uiterlijk 20 september af.
+## The problem
 
-## Dag 1
+A successful healthcheck does not tell you why an individual request is slow or failing. This lab connects external availability checks with request logs and traces, so an issue can be followed from an alert to the processing step that caused it.
 
-- Demo-API, lokaal op poort 4310.
-- Healthcheck met timeout, controle op HTTP-status én response-inhoud.
-- Functionele tests voor verwerking, ongeldige invoer en onbekende routes.
-- GitHub Actions voor tests en een echte bereikbaarheidscheck.
-- Docker Compose-configuratie voor een reproduceerbare lokale omgeving.
+The API accepts a document name and simulates processing. **The HTTP traffic and telemetry are real; document storage and extraction are not implemented.**
 
-**Live:** [Document Lab · Bereikbaarheid](https://bronzemillipede944.grafana.net/d/document-lab-day-1). De private probe stuurt elke minuut echte healthcheckmetingen naar Grafana. Zie het [dag-1-verslag](docs/day-01.md). Applicatie-interne OpenTelemetry is aangesloten op dag 2; zie [het verslag](docs/day-02.md).
+## Results at a glance
 
-## Dag 2
+| Result | What was verified | Evidence |
+| --- | --- | --- |
+| Request-level diagnosis | One HTTP request linked to its log and five trace spans | [Trace/log verification](docs/evidence/day-14-check.json) |
+| Alerting and recovery | Injected latency and HTTP 500 errors triggered alerts; both rules recovered | [Incident exercise](docs/day-10.md) |
+| Bounded load testing | 1,000 requests/s for 20 seconds, with no unexpected HTTP errors or dropped iterations | [Load profile and results](docs/day-09.md) |
+| Measured improvement | Remaining processing after client disconnect fell from **29.73 ms to 1.04 ms** on average | [Before/after comparison](docs/day-11.md) |
+| Repeatable delivery | CI tests the API and starts the Docker setup twice from a clean checkout | [GitHub Actions workflow](.github/workflows/ci.yml) |
+| Usage awareness | A command checks Cloud usage against documented Free-tier budgets; local logs have rotation limits | [Budget decisions](docs/day-13.md) |
 
-OpenTelemetry-traces van echte API-aanvragen komen aan in Grafana Tempo, inclusief route, statuscode en duur. De API geeft een `x-trace-id` terug. Zie [starten met telemetrie](telemetry/README.md) en [verificatiebewijs](docs/day-02.md).
+These are measurements from a local lab. The load test did not establish maximum or sustained production capacity. The cancellation improvement reduces abandoned work; normal request processing remained approximately as fast as before.
 
-```sh
-docker compose -f docker-compose.yml -f docker-compose.monitoring.yml -f docker-compose.telemetry.yml up -d --build --wait
-npm run check:traces
+## See the system working
+
+![Grafana dashboard showing request volume, response times, availability and zero server errors](docs/assets/day-14/document-lab-day-3.png)
+
+*Recorded on 15 September 2026. The 32% HTTP error figure comes from deliberately invalid test inputs; the dashboard shows zero 5xx server errors. This screenshot combines a functional check and demo traffic, not a performance benchmark.*
+
+[Availability screenshot and final verification](docs/day-14.md) · [Guided demonstration](docs/walkthrough.md)
+
+The screenshots and saved evidence can be reviewed without a Grafana login. The live Grafana stack requires account access and a running local lab. Repository access is required while this GitHub repository is private.
+
+## What the project demonstrates
+
+| Area | Implementation |
+| --- | --- |
+| Backend engineering | Input validation, bounded request bodies, sanitized errors and cancellation of abandoned processing |
+| Observability | OpenTelemetry instrumentation, structured logs, trace correlation and Grafana dashboards |
+| Troubleshooting | Controlled failure injection, identification of the affected processing span and verified recovery |
+| Testing | HTTP contract checks, negative cases, cancellation tests and k6 scenarios with explicit thresholds |
+| Delivery and operations | Docker Compose, pinned image digests, dependency lockfile, CI artifacts and repeatable setup commands |
+| Technical communication | Architecture, runbooks, measured results and clearly stated limitations |
+
+The repository provides practical discussion material for junior backend, DevOps and cloud operations interviews. Detailed experiment notes and runbooks are in Dutch; commands, source code and raw measurements are directly available for review.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Client[Client / k6] --> API[Node.js API]
+    Probe[Private health probe] --> API
+    API -->|OpenTelemetry traces| Tempo[Tempo]
+    API -->|Structured logs| Loki[Loki]
+    Probe --> Metrics[Cloud metrics]
+    Tempo --> Dashboards[Grafana dashboards]
+    Metrics --> Dashboards
+    Loki --> Alerts[Alert rules]
+    Metrics --> Alerts
+    Alerts --> Email[Email notifications]
 ```
 
-## Dag 3
+The API dashboard derives request metrics from traces. Alert rules use probe metrics and request logs. Healthchecks are excluded from application traces and logs to avoid duplicate telemetry.
 
-**Live:** [Document Lab · API-overzicht](https://bronzemillipede944.grafana.net/d/document-lab-day-3): aanvragen, HTTP-foutpercentage, serverfouten en responstijden op basis van echte traces. Zie [het dag-3-verslag](docs/day-03.md).
+[Architecture and design boundaries](docs/architecture.md) · [Application code](app/) · [Telemetry code](telemetry/)
 
-Met het lab actief genereert `npm run demo:traffic` één begrensde demonstratie van 40 aanvragen. Dit is geen permanente verkeersgenerator.
+## Try it locally — no Grafana account required
 
-## Dag 4
-
-Applicatielogs staan in Grafana Loki met omgeving, release, vaste foutreden en trace-ID. De bestaande telemetrie-overlay activeert zowel logs als traces. Zie [zoekopdrachten en live bewijs](docs/day-04.md) en [logconfiguratie](telemetry/logs.md).
-
-## Dag 5
-
-De trace toont nu afzonderlijk het lezen, ontleden, valideren en verwerken van een documentaanvraag. Onverwachte verwerkingsfouten geven HTTP 500 en een ERROR-log; ongeldige invoer blijft HTTP 400. Zie [bewijs en uitleg](docs/day-05.md).
-
-## Dag 6
-
-Drie meldingsregels voor bereikbaarheid, serverfouten en traagheid zijn aangemaakt in Grafana. E-mail is ingesteld; testverzending en ontvangst zijn bevestigd. De testmail kwam in de spammap aan. Zie [dag 6](docs/day-06.md) en [het meldingsrunbook](alerts/README.md).
-
-## Dag 7
-
-`npm run check:flow` controleert de volledige documentflow via 12 HTTP-stappen, inclusief antwoorden, IDs, invoerfouten en herstel. Dezelfde controle draait automatisch in GitHub Actions bij iedere push en pull request. Zie [dag 7](docs/day-07.md).
-
-## Dag 8
-
-`npm run perf:baseline` voert een begrensde lokale k6-test uit: opwarmen, daarna één minuut 5 aanvragen/s, met 90% geldige documenten en 10% verwachte afwijzingen. Het rapport controleert correctheid en p95-responstijd. Vereist k6 en een actieve API met telemetrie. Zie [profiel, nulmeting en herhalen](docs/day-08.md).
-
-## Dag 9
-
-`npm run perf:ladder` verhoogt het aanbod stapsgewijs van 5 naar maximaal 1.000 aanvragen/s. Elke stap heeft eigen criteria; bij een mislukte stap stopt de verhoging en volgt een volledige herstelmeting. Zie [werkwijze en resultaten](docs/day-09.md).
-
-## Dag 10
-
-`npm run experiment:faults` oefent vertraging, interne fouten en herstel op een tijdelijke lokale API. De runner volgt de bestaande Grafana-regels en controleert de oorzaak via gekoppelde logs en traces. Dit kan echte labwaarschuwingen sturen. Zie [uitvoering en diagnose](docs/day-10.md) en [het experimentrunbook](experiments/README.md).
-
-## Dag 11
-
-De API annuleert verwerking wanneer de client voortijdig de verbinding verbreekt. `npm run perf:cancellation` vergelijkt de oude en nieuwe code: verlaten werk stopt eerder, terwijl normale verwerking ongeveer even snel blijft. Zie [voor/na-meting en grenzen](docs/day-11.md).
-
-## Dag 12
-
-`npm run lab:up` controleert de vereisten, start de volledige Docker-setup en verifieert de gebruikersflow plus echte trace/log-aflevering. `lab:apply` past de twee dashboards en drie alertregels uit Git toe. GitHub Actions controleert ook tweemaal starten vanaf een schone checkout zonder Cloud-credentials. Zie [setup en foutafhandeling](docs/setup.md) en [dag 12](docs/day-12.md).
-
-## Dag 13
-
-`npm run lab:usage` vergelijkt het werkelijke Cloud-gebruik met de Free-budgetten en signaleert 80% gebruik of ontbrekende gegevens. Traces en requestlogs blijven volledig voor de bestaande dashboards en meldingen; lokale Docker-logs zijn begrensd. Zie [gebruik, instellingen en grenzen](docs/day-13.md).
-
-## Dag 14
-
-Het eindverslag bundelt actuele, gecontroleerde screenshots, de architectuur, een demonstratiehandleiding en verwijzingen naar het meetbewijs. Zie [dag 14](docs/day-14.md).
-
-## Starten
-
-Vereist: Node.js 22 of hoger (Node.js 24 wordt gebruikt in CI en Docker).
+Requires **Node.js 22+**. CI and Docker use Node.js 24.
 
 ```sh
+git clone https://github.com/phlppgdfry/grafana-observability-lab.git
+cd grafana-observability-lab
 npm ci
 npm start
 ```
 
-Open http://127.0.0.1:4310/health. In een tweede terminal:
+If the repository is private, cloning requires access. In a second terminal:
 
 ```sh
-npm run check
+npm run check:flow
 npm test
 curl -X POST http://127.0.0.1:4310/api/documents/process \
   -H 'Content-Type: application/json' \
   -d '{"name":"demo.pdf"}'
 ```
 
-Of start via Docker (stop eerst een eventueel lokaal draaiende API):
+Alternatively, with Docker running and port 4310 free:
 
 ```sh
-docker compose up --build -d
-npm run check
-docker compose down
+npm ci
+npm run lab:up -- --local
+npm run lab:stop -- --local
 ```
 
-De demo simuleert verwerking; er worden geen documenten opgeslagen. HOST en PORT kunnen als omgevingsvariabelen worden ingesteld. `.env.example` beschrijft de opties; `.env` wordt niet automatisch geladen.
+Cloud mode requires the existing Grafana context and local credentials. Follow the [setup runbook](docs/setup.md), then run `npm run lab:up`. Do not run local Node and Docker versions on the same port simultaneously.
 
-## Grafana verbinden
+## Explore the evidence
 
-```sh
-gcx login lab --server https://bronzemillipede944.grafana.net --oauth --yes
-gcx config check --context lab
-gcx datasources list --context lab
-```
-
-OAuth-credentials worden door gcx buiten deze repo bewaard. De extra Cloud-productaanmelding is een afzonderlijke stap als Synthetic Monitoring die vereist.
-
-De actieve private Grafana-probe bereikt de demo via de Docker-alias `document-lab.test`. Er draait daarnaast een lokale check en een check in GitHub Actions.
-
-De actieve private-probe-configuratie staat in `docker-compose.monitoring.yml` en `tests/grafana-healthcheck.yaml`. Start met `docker compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d --wait`. Lokale credentials zijn vereist. Zie [Cloud-check instellen](docs/cloud-check.md).
-
-## Structuur
-
-| Map | Inhoud |
+| Start here | Contents |
 | --- | --- |
-| `app/` | Zelfstandige documentverwerkingsdemo |
-| `dashboards/` | Live dashboards voor bereikbaarheid en API-verkeer |
-| `alerts/` | Meldingsregels vanaf dag 6 |
-| `telemetry/` | OpenTelemetry-tracing en startinstructies |
-| `tests/` | Bereikbaarheidscheck, functionele gebruikersflow en k6-nulmeting |
-| `experiments/` | Gecontroleerde foutscenario’s vanaf dag 10 |
-| `docs/` | Voortgang, architectuur en bewijs |
-| `.github/workflows/` | Automatische controles |
+| [Dutch project summary](docs/project-summary.nl.md) | Plain-language overview, interview discussion and CV wording |
+| [Demonstration](docs/walkthrough.md) | A short walkthrough from request to trace and diagnosis |
+| [Final report](docs/day-14.md) | Screenshots and the final verification snapshot |
+| [Setup](docs/setup.md) | Requirements, commands and troubleshooting |
+| [Alert runbook](alerts/README.md) | Rules, notification behavior and response steps |
+| [14-step learning log](docs/roadmap.md) | Complete development history and experiment reports |
+| [Raw evidence](docs/evidence/) | Saved JSON measurements and verification results |
 
-Zie de [14-daagse roadmap](docs/roadmap.md). Dagnummer is een werkvolgorde; de werkelijke trial-einddatum bepaalt de beschikbare kalenderdagen.
+## Scope and authorship
+
+This is an **AI-assisted learning and portfolio project developed with Codex**. AI contributed implementation, testing and documentation. The repository preserves reproducible commands and measured outcomes so the work can be inspected and discussed beyond the generated code.
+
+It is a single-machine lab with simulated document processing. Authentication, persistent storage, real PDF extraction, high availability and production deployment are outside its current scope. Future integrations must support cancellation themselves; an abort signal does not undo completed side effects.
+
+All fourteen planned work stages are complete. Ongoing maintenance and account checks are tracked in the [project status](docs/status.md). Credentials remain outside Git. Historical screenshots are evidence from their capture date, not a live availability guarantee.
