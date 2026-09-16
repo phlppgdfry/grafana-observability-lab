@@ -53,4 +53,4 @@ Voor een inhoudelijk gesprek kun je de [demonstratie](walkthrough.md) doorlopen 
 - [Lokaal starten](setup.md)
 - [Broncode op GitHub](https://github.com/phlppgdfry/grafana-observability-lab)
 
-De repository is bij de portfolio-update van 16 september 2026 privé. Recruiters hebben daarom expliciet toegang of een gedeelde kopie van de samenvatting nodig. Een Grafana-login is niet nodig om de opgeslagen screenshots en rapporten te beoordelen, zodra de repository toegankelijk is.
+De repository is sinds 16 september 2026 openbaar. Recruiters kunnen de code, screenshots en rapporten zonder Grafana-login bekijken. De live Grafana-stack vereist wel accounttoegang. Voor voorbereiding op een gesprek: lees de [uitleg van de demo en begrippen](demo-guide.nl.md).

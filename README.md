@@ -4,7 +4,7 @@
 
 An AI-assisted portfolio project by **Philippe Godfroy**, combining a Node.js API, OpenTelemetry, Grafana Cloud, Docker and k6. The project explores how to detect failures, locate their cause, verify recovery and measure a targeted improvement.
 
-[Project summary · Nederlands](docs/project-summary.nl.md) · [Architecture](docs/architecture.md) · [10-minute demo](docs/walkthrough.md) · [CI results](https://github.com/phlppgdfry/grafana-observability-lab/actions/workflows/ci.yml)
+[Project summary · Nederlands](docs/project-summary.nl.md) · [Demo explained · Nederlands](docs/demo-guide.nl.md) · [Architecture](docs/architecture.md) · [10-minute demo](docs/walkthrough.md) · [CI results](https://github.com/phlppgdfry/grafana-observability-lab/actions/workflows/ci.yml)
 
 ## The problem
 
@@ -33,7 +33,7 @@ These are measurements from a local lab. The load test did not establish maximum
 
 [Availability screenshot and final verification](docs/day-14.md) · [Guided demonstration](docs/walkthrough.md)
 
-The screenshots and saved evidence can be reviewed without a Grafana login. The live Grafana stack requires account access and a running local lab. Repository access is required while this GitHub repository is private.
+The screenshots and saved evidence can be reviewed without a Grafana login. The live Grafana stack requires account access and a running local lab. This repository is public; the live Grafana account and local API remain separate from repository access.
 
 ## What the project demonstrates
 
@@ -79,7 +79,7 @@ npm ci
 npm start
 ```
 
-If the repository is private, cloning requires access. In a second terminal:
+In a second terminal:
 
 ```sh
 npm run check:flow
