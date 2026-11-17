@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grafana Observability Lab — from an API request to a diagnosed incident, with evidence at every step</title>
+<meta name="description" content="A Node.js API instrumented with OpenTelemetry and connected to Grafana Cloud: traces, logs, availability probes, alert rules, fault injection, k6 load tests and a measured fix. Replay the recorded evidence in your browser.">
+<link rel="canonical" href="https://phlppgdfry.github.io/grafana-observability-lab/">
+<meta property="og:type" content="website"><meta property="og:title" content="Grafana Observability Lab — from an API request to a diagnosed incident, with evidence at every step"><meta property="og:description" content="A Node.js API instrumented with OpenTelemetry and connected to Grafana Cloud: traces, logs, availability probes, alert rules, fault injection, k6 load tests and a measured fix. Replay the recorded evidence in your browser.">
+<meta property="og:url" content="https://phlppgdfry.github.io/grafana-observability-lab/"><meta property="og:image" content="https://phlppgdfry.github.io/grafana-observability-lab/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0d12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23fb923c'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/showcase.css">
+<style>:root{--brand:#fb923c;--accent-ink:#1a0b02}
+#go-body{min-height:320px}
+.go-wf{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px}
+.go-span{display:grid;grid-template-columns:200px 1fr 80px;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.go-span:first-child{border-top:0}
+@media (max-width:620px){.go-span{grid-template-columns:1fr 70px}.go-bar{grid-column:1/-1;grid-row:2}}
+.go-sn{font:13px var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.go-sn.child{padding-left:16px;color:var(--muted)}
+.go-bar{position:relative;height:14px;background:var(--card);border-radius:4px}
+.go-bar i{position:absolute;top:0;bottom:0;border-radius:4px;background:color-mix(in srgb,var(--accent) 55%,transparent);min-width:2px}
+.go-bar i.hot{background:var(--accent)}
+.go-ms{text-align:right;font-size:12px;color:var(--muted)}
+.go-call{margin:14px 0 0;font-size:15px}
+.go-log{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;color:var(--muted);overflow-x:auto;margin:6px 0 0}
+.go-alerts{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 12px 26px;position:relative}
+.go-lane{display:grid;grid-template-columns:190px 1fr;gap:10px;align-items:center;margin:8px 0}
+@media (max-width:620px){.go-lane{grid-template-columns:1fr}}
+.go-ln{font-size:13px;color:var(--muted)}
+.go-track{position:relative;height:22px;background:var(--card);border-radius:6px;overflow:hidden}
+.go-track i,.go-legend i{position:absolute;top:0;bottom:0}
+.go-legend i{position:static;display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+.inactive{background:color-mix(in srgb,var(--ok) 35%,transparent)}
+.pending{background:var(--warn)}
+.firing{background:var(--bad)}
+.inject{background:var(--info)}
+.go-ticks{position:absolute;left:212px;right:12px;bottom:6px;height:14px}
+@media (max-width:620px){.go-ticks{left:12px}}
+.go-ticks span{position:absolute;transform:translateX(-50%);font:10px var(--mono);color:var(--dim)}
+.go-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.go-lc{display:flex;gap:10px;align-items:flex-end;height:240px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.go-lb{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center;min-width:0}
+.go-lbv{background:var(--accent);border-radius:6px 6px 0 0;position:relative;min-height:4px}
+.go-lbv span{position:absolute;top:-18px;left:0;right:0;font:11px var(--mono);color:var(--fg)}
+.go-lbl{font-size:12px;margin-top:6px}
+.go-cmp{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.go-cr{display:grid;grid-template-columns:120px 1fr 80px;gap:10px;align-items:center;margin-top:8px;font-size:14px}
+.go-ct{height:16px;background:var(--card);border-radius:4px;overflow:hidden}
+.go-ct i{display:block;height:100%;border-radius:4px}
+.go-ct i.bad{background:var(--bad)}.go-ct i.ok{background:var(--ok)}.go-ct i.n{background:color-mix(in srgb,var(--accent) 60%,transparent)}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="brand" href="#"><i class="dot"></i><span>Grafana Observability Lab</span></a>
+  <nav><a class="" href="#demo">Try it</a><a class="" href="#how">How it works</a><a class="hide-sm" href="#screens">Screens</a><a class="hide-sm" href="#run">Run it</a><a href="https://github.com/phlppgdfry/grafana-observability-lab" aria-label="GitHub repository">GitHub</a><button class="theme" type="button" aria-label="Toggle light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></nav>
+</div></div>
+<main>
+<header class="hero"><div class="wrap grid">
+  <div>
+    <div class="kicker"><span>Node.js · OpenTelemetry · Grafana Cloud · k6</span><span class="chip status">Lab</span></div>
+    <h1>A green healthcheck <em>doesn't explain a slow request</em>.</h1>
+    <p class="lede">This lab connects one small API to traces, logs, probes and alerts in Grafana Cloud, then breaks it on purpose. Every claim on this page comes from a saved measurement in the repository: the trace of one request, the alert timeline after an injected fault, a stepped load test and a before/after comparison of a fix.</p>
+    <div class="ctas"><a class="btn primary" href="#demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Replay the evidence</a><a class="btn" href="https://github.com/phlppgdfry/grafana-observability-lab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg> Source on GitHub</a></div>
+    <div class="stack"><span class="chip">Node.js 24</span><span class="chip">OpenTelemetry</span><span class="chip">Grafana Cloud</span><span class="chip">Tempo · Loki</span><span class="chip">k6</span><span class="chip">Docker Compose</span><span class="chip">node:test</span><span class="chip">GitHub Actions</span></div>
+  </div>
+  <div class="hero-visual"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>Grafana Cloud · Document Lab dashboard</b></div><img src="img/docs-assets-day-14-document-lab-day-3.webp" alt="Grafana Observability Lab" width="1600" height="1200"></div><div class="caption">Recorded 15 September 2026. The 32% HTTP error figure comes from deliberately invalid inputs; there are zero 5xx errors.</div></div>
+</div></header>
+<section id="why"><div class="wrap">
+  <p class="eyebrow">Why it exists</p><h2>"It's up" and "it works" are different questions.</h2>
+  <div class="problem">
+    <div class="card before"><div class="label">Without it</div><p>An uptime check says the service answers. When a user complains that one upload was slow or failed, there is no way to tell which request it was, which step took the time, or whether the alert that fired is about now or about five minutes ago.</p></div>
+    <div class="card after"><div class="label">With it</div><p>Every request carries a trace ID into its log line. Spans show where the time went. Alert rules on probes and logs are tested by injecting real faults, and an improvement is only claimed after measuring it before and after.</p></div>
+  </div>
+</div></section>
+<section id="demo"><div class="wrap">
+  <p class="eyebrow">Try it · runs in your browser</p><h2>Replay the lab's evidence</h2>
+  <p class="sub">Four recorded exercises, rendered from the JSON files in <code>docs/evidence/</code>: one request traced end to end, an injected fault and the alerts it caused, a stepped load test, and a measured fix. Pick a tab.</p>
+  <div class="demo"><div class="tabs" id="go-tabs" role="tablist">
+  <button type="button" data-t="trace" aria-selected="true">1 · Follow one request</button>
+  <button type="button" data-t="alerts">2 · Inject a fault</button>
+  <button type="button" data-t="load">3 · Load test</button>
+  <button type="button" data-t="cancel">4 · Measure a fix</button>
+</div>
+<div id="go-body"></div>
+</div>
+  <p class="note">Measurements from a local lab on one laptop. The load test shows bounded behaviour up to its planned ceiling, not a maximum or sustained production capacity.</p>
+</div></section>
+<section id="how"><div class="wrap">
+  <p class="eyebrow">How it works</p><h2>What the lab covers</h2>
+  
+  <div class="cards"><div class="card"><div class="ic">01</div><h3>Backend hygiene</h3><p>Input validation, bounded request bodies, sanitized errors and cancellation of work when the client disconnects.</p></div><div class="card"><div class="ic">02</div><h3>Correlated telemetry</h3><p>OpenTelemetry traces to Tempo and structured logs to Loki, joined by trace and request IDs. Healthchecks stay out of application telemetry.</p></div><div class="card"><div class="ic">03</div><h3>Alerting, tested</h3><p>Latency and server-error rules on probe metrics and logs, triggered by controlled fault injection and watched until they recover.</p></div><div class="card"><div class="ic">04</div><h3>Reproducible delivery</h3><p>Docker Compose with pinned image digests, a lockfile, CI that starts the stack twice from a clean checkout, and a Free-tier usage budget check.</p></div></div>
+  <h3 style="margin:34px 0 14px">The flow, step by step</h3><div class="flow" role="list"><div class="node"><div class="n">01</div><b>Request</b><small>client or k6 calls the API</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">02</div><b>Trace + log</b><small>spans to Tempo, log line to Loki, same trace ID</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">03</div><b>Probe</b><small>private availability checks every 60 s</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node hl"><div class="n">04</div><b>Alert rules</b><small>latency and 5xx, with look-back windows</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">05</div><b>Diagnose</b><small>from alert to the slow or failing span</small></div></div>
+</div></section>
+<section id="screens"><div class="wrap">
+  <p class="eyebrow">Screens</p><h2>What it looks like</h2>
+  <p class="sub">Screenshots from the Grafana Cloud stack. The live stack needs an account and a running local lab, so the saved evidence is the public record.</p>
+  <div class="gallery"><figure data-zoom="Day 1: first signal — A private probe from the Mac to Grafana Cloud: online, response time, HTTP status."><div class="frame"><div class="bar"><i></i><i></i><i></i><b>Grafana Cloud</b></div><img src="img/docs-assets-day-01-dashboard.webp" alt="Day 1: first signal" width="1600" height="1200" loading="lazy" decoding="async"></div><figcaption><b>Day 1: first signal</b> A private probe from the Mac to Grafana Cloud: online, response time, HTTP status.</figcaption></figure><figure data-zoom="Day 14: availability over time — The same panels after two weeks, with a continuous availability series."><div class="frame"><div class="bar"><i></i><i></i><i></i><b>Grafana Cloud</b></div><img src="img/docs-assets-day-14-document-lab-day-1.webp" alt="Day 14: availability over time" width="1600" height="1200" loading="lazy" decoding="async"></div><figcaption><b>Day 14: availability over time</b> The same panels after two weeks, with a continuous availability series.</figcaption></figure></div>
+</div></section>
+<section id="evidence"><div class="wrap">
+  <p class="eyebrow">Evidence</p><h2>What is real, and what is not</h2>
+  
+  <div class="metrics"><div class="metric"><div class="v">29.73 → 1.04 ms</div><div class="l">work after a client disconnect</div><div class="s">mean of 20 runs; normal requests unchanged at ~41 ms</div></div><div class="metric"><div class="v">1,000 req/s</div><div class="l">bounded load step</div><div class="s">20 s, 0 failed requests, 0 dropped iterations</div></div><div class="metric"><div class="v">11</div><div class="l">automated tests</div><div class="s">HTTP contract, negative cases and cancellation</div></div></div>
+  <div class="honest" style="margin-top:18px">
+      <div class="card real"><h3><span class="pill ok">REAL</span> Built and verified</h3><ul><li>HTTP traffic, OpenTelemetry traces, Loki logs and Grafana alert rules, against a real Grafana Cloud stack</li><li>Fault injection, alert firing and recovery, recorded with timestamps</li><li>k6 load steps and the cancellation comparison, with raw results committed</li><li>CI runs the tests and starts the Docker setup twice from a clean checkout</li></ul></div>
+      <div class="card sim"><h3><span class="pill warn">SIMULATED</span> Mocked or not built yet</h3><ul><li>The API simulates document processing; storage and extraction are not implemented</li><li>Load results come from one local machine, not a production environment</li><li>Detailed day-by-day notes and runbooks are in Dutch</li></ul></div></div>
+</div></section>
+<section id="run"><div class="wrap two">
+  <div><p class="eyebrow">Run it yourself</p><h2>Run it locally</h2>
+  <p class="sub">Node.js 22+. No Grafana account needed to run the API, tests and flow check; the Cloud setup is in <code>docs/setup.md</code>.</p>
+  <div class="code"><button class="copy" type="button">Copy</button><pre><code>git clone https://github.com/phlppgdfry/grafana-observability-lab.git
+cd grafana-observability-lab
+npm ci
+npm start                 # API on http://127.0.0.1:4310
+
+<span class="c"># in a second terminal</span>
+npm run check:flow        # the 12-step HTTP flow
+npm test
+curl -X POST http://127.0.0.1:4310/api/documents/process \
+  -H &#x27;Content-Type: application/json&#x27; -d &#x27;{&quot;name&quot;:&quot;demo.pdf&quot;}&#x27;</code></pre></div></div>
+  <div><p class="eyebrow">Go deeper</p><h2>Read the source</h2>
+  <div class="links"><a href="https://github.com/phlppgdfry/grafana-observability-lab"><span>Repository</span><span>github</span></a><a href="https://github.com/phlppgdfry/grafana-observability-lab/blob/HEAD/docs/walkthrough.md"><span>10-minute guided demo</span><span>docs</span></a><a href="https://github.com/phlppgdfry/grafana-observability-lab/blob/HEAD/docs/architecture.md"><span>Architecture and boundaries</span><span>docs</span></a><a href="https://github.com/phlppgdfry/grafana-observability-lab/blob/HEAD/docs/day-10.md"><span>Incident exercise (day 10)</span><span>nl</span></a><a href="https://github.com/phlppgdfry/grafana-observability-lab/blob/HEAD/docs/day-11.md"><span>Cancellation fix (day 11)</span><span>nl</span></a><a href="https://github.com/phlppgdfry/grafana-observability-lab/tree/HEAD/docs/evidence"><span>Raw evidence</span><span>json</span></a></div></div>
+</div></section></main>
+<footer><div class="wrap">
+  <span>Grafana Observability Lab · A portfolio project by Philippe Godfroy</span>
+  <span><a href="https://www.philippegodfroy.com/work">More projects</a> · <a href="https://github.com/phlppgdfry/grafana-observability-lab">Source</a></span>
+</div></footer>
+<script src="assets/showcase.js"></script>
+<script src="assets/demo.js" type="module"></script>
+</body></html>

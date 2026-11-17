@@ -1,5 +1,11 @@
 # Grafana Observability Lab
 
+<!-- showcase:start -->
+> **[▶ Replay the evidence](https://phlppgdfry.github.io/grafana-observability-lab/)** — follow one traced request, watch alerts fire after an injected fault, and see the load test and a measured fix, all rendered from the recorded measurements in docs/evidence.
+
+[![Replay the evidence: grafana-observability-lab](site/preview.png)](https://phlppgdfry.github.io/grafana-observability-lab/)
+<!-- showcase:end -->
+
 **From an API request to a diagnosed incident — with evidence at every step.**
 
 An AI-assisted portfolio project by **Philippe Godfroy**, combining a Node.js API, OpenTelemetry, Grafana Cloud, Docker and k6. The project explores how to detect failures, locate their cause, verify recovery and measure a targeted improvement.
